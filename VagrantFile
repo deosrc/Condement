@@ -36,6 +36,12 @@ Vagrant.configure(2) do |config|
             puppet.manifest_file = "base.pp"
         end
 
+        # Set the keyboard language
+        config.vm.provision 'puppet' do |puppet|
+            puppet.manifests_path = "keyboard_layouts"
+            puppet.manifest_file = condement_config['keyboard_layout'] + ".pp"
+        end
+
         # Run the puppet files identified in the configuration for install
         puppet_files_to_apply = condement_config['puppet_files_to_apply']
         puppet_files_to_apply.each do |puppet_file|

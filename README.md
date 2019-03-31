@@ -35,6 +35,7 @@ A sample configuration file is provided in the root of the repository named [con
 |---|---|
 | `cpus` | The number of virtual CPUs to configure on the Virtual Machine. This should be equal to or less than the number of CPU cores on your host. |
 | `memory_mb` | The amount of memory to attach to the Virtual Machine in Megabytes. This should be less than the amount of free memory on your host machine otherwise you will encounter performance issues. |
+| `keyboard_layout` | The puppet file within [keyboard_layouts](./keyboard_layouts) to apply for the keyboard layout. |
 | `hostname` | The hostname of the virtual machine. |
 | `show_gui` | Determines if VirtualBox should show the Virtual Machine display once it is created. |
 | `host_work_dir` | The path to a directory on the host which is mounted to the `/mnt/work` directory in the Virtual Machine (not currently working). |

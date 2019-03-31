@@ -1,5 +1,6 @@
 cpus: 2
 memory_mb: 2048
+keyboard_layout: "en_gb"
 hostname: "condement"
 host_work_dir: "C:\\Users\\Dale"
 show_gui: true
