@@ -19,6 +19,15 @@ Vagrant.configure(2) do |config|
             # Configure clipboard and drag and drop for ease of use
             v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
             v.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
+
+            # Configure the display
+            accelerate3d = 'off'
+            if (condement_config['video_3d_acceleration']) then
+                accelerate3d = 'on'
+            end
+
+            v.customize ['modifyvm', :id, '--accelerate3d', accelerate3d]
+            v.customize ['modifyvm', :id, '--vram', condement_config['video_memory_mb']]
         end
         # Fix file permissions on authorized_keys file
         config.vm.provision "shell", inline: "chmod 644 /home/vagrant/.ssh/authorized_keys"

@@ -35,6 +35,8 @@ A sample configuration file is provided in the root of the repository named [con
 |---|---|
 | `cpus` | The number of virtual CPUs to configure on the Virtual Machine. This should be equal to or less than the number of CPU cores on your host. |
 | `memory_mb` | The amount of memory to attach to the Virtual Machine in Megabytes. This should be less than the amount of free memory on your host machine otherwise you will encounter performance issues. |
+| `video_memory_mb` | The amount of video memory to assign to the Virtual machine in Megabytes. This should be between 1 and 128. |
+| `video_3d_acceleration` | Determines if 3 video acceleration should be enabled. |
 | `keyboard_layout` | The puppet file within [keyboard_layouts](./keyboard_layouts) to apply for the keyboard layout. |
 | `hostname` | The hostname of the virtual machine. |
 | `show_gui` | Determines if VirtualBox should show the Virtual Machine display once it is created. |
