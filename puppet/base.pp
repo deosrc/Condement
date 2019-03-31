@@ -18,6 +18,11 @@ package { 'ubuntu-desktop':
   install_options => '--no-install-recommends'
 }
 
+package { 'gnome-software':
+  ensure  => present,
+  require => Package['ubuntu-desktop']
+}
+
 #######################################
 # Install VirtualBox Guest Additions
 #######################################
