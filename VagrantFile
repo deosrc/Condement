@@ -5,10 +5,11 @@ condement_config = YAML.load_file('./condement.yaml')
 Vagrant.configure(2) do |config|
     config.vm.define "Condement" do |server|
         server.vm.box = "ubuntu/bionic64"
+        server.vm.hostname = condement_config['hostname']
 
         server.vm.provider :virtualbox do |v|
             # Configure basic VM settings
-            v.name = "Condement"
+            v.name = condement_config['hostname']
             v.gui = condement_config['show_gui']
 
             # Configure resources available to the VM
