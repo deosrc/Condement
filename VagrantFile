@@ -1,0 +1,44 @@
+require 'yaml'
+
+condement_config = YAML.load_file('./condement.yaml')
+
+Vagrant.configure(2) do |config|
+    config.vm.define "Condement" do |server|
+        server.vm.box = "ubuntu/bionic64"
+
+        server.vm.provider :virtualbox do |v|
+            # Configure basic VM settings
+            v.name = "Condement"
+            v.gui = condement_config['show_gui']
+
+            # Configure resources available to the VM
+            v.cpus = condement_config['cpus']
+            v.memory = condement_config['memory_mb']
+
+            # Configure clipboard and drag and drop for ease of use
+            v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+            v.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
+        end
+        # Fix file permissions on authorized_keys file
+        config.vm.provision "shell", inline: "chmod 644 /home/vagrant/.ssh/authorized_keys"
+
+        # Update the system
+        config.vm.provision "shell", inline: "sudo apt update"
+        config.vm.provision "shell", inline: "sudo apt upgrade -y"
+
+        # Install puppet
+        config.vm.provision "shell", inline: "sudo apt install -y puppet"
+
+        # Run puppet base
+        config.vm.provision 'puppet' do |puppet|
+            puppet.manifests_path = "puppet"
+            puppet.manifest_file = "base.pp"
+        end
+
+        # Configure the work folder
+        server.vm.synced_folder condement_config['host_work_dir'], "/mnt/work/"
+
+        # Restart the VM
+        config.vm.provision "shell", inline: "sudo reboot"
+    end
+end
