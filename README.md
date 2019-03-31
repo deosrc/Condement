@@ -8,7 +8,7 @@ This project was started due to various issues encountered while trying to devel
 
 The environment can be configure with a simple yaml file but as default you should end up with:
 
-* Ubuntu 16.04 (LTS)
+* Ubuntu 18.04 (LTS)
 * A 'dev' user with sudo (password: 'condement')
 * Visual Studio Code
 * Docker
