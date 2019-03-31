@@ -23,6 +23,10 @@ package { 'gnome-software':
   require => Package['ubuntu-desktop']
 }
 
+package { 'curl':
+  ensure => present
+}
+
 #######################################
 # Install VirtualBox Guest Additions
 #######################################
