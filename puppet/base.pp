@@ -10,24 +10,6 @@ user { 'dev':
 }
 
 #######################################
-# Install Desktop UI & useful standard
-# software
-#######################################
-package { 'ubuntu-desktop':
-  ensure          => present,
-  install_options => '--no-install-recommends'
-}
-
-package { 'gnome-software':
-  ensure  => present,
-  require => Package['ubuntu-desktop']
-}
-
-package { 'curl':
-  ensure => present
-}
-
-#######################################
 # Install VirtualBox Guest Additions
 #######################################
 package { 'virtualbox-guest-dkms':
@@ -39,5 +21,12 @@ package { 'virtualbox-guest-utils':
 }
 
 package { 'virtualbox-guest-x11':
+  ensure => present
+}
+
+#######################################
+# Install useful standard software
+#######################################
+package { 'curl':
   ensure => present
 }
