@@ -29,8 +29,6 @@ Vagrant.configure(2) do |config|
             v.customize ['modifyvm', :id, '--accelerate3d', accelerate3d]
             v.customize ['modifyvm', :id, '--vram', condement_config['video_memory_mb']]
         end
-        # Fix file permissions on authorized_keys file
-        config.vm.provision "shell", inline: "chmod 644 /home/vagrant/.ssh/authorized_keys"
 
         # Update the system
         config.vm.provision "shell", inline: "sudo apt update"
