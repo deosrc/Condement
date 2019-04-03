@@ -39,7 +39,7 @@ Vagrant.configure(2) do |config|
 
         # Run puppet base
         config.vm.provision 'puppet' do |puppet|
-            puppet.manifests_path = "puppet"
+            puppet.manifests_path = "puppet_base"
             puppet.manifest_file = "base.pp"
         end
 
@@ -56,10 +56,10 @@ Vagrant.configure(2) do |config|
         end
 
         # Run the puppet files identified in the configuration for install
-        puppet_files_to_apply = condement_config['puppet_files_to_apply']
+        puppet_files_to_apply = condement_config['software']
         puppet_files_to_apply.each do |puppet_file|
             config.vm.provision 'puppet' do |puppet|
-                puppet.manifests_path = 'puppet'
+                puppet.manifests_path = 'software'
                 puppet.manifest_file = puppet_file + '.pp'
             end
         end

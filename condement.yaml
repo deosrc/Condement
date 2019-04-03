@@ -7,4 +7,4 @@ hostname: "condement"
 host_work_dir: "C:\\Users\\Dale"
 desktop: "ubuntu"
 show_gui: true
-puppet_files_to_apply: ['vscode', 'docker']
+software: ['vscode', 'docker']
