@@ -5,16 +5,16 @@ condement_config = YAML.load_file('./condement.yaml')
 Vagrant.configure(2) do |config|
     config.vm.define "Condement" do |server|
         server.vm.box = "ubuntu/bionic64"
-        server.vm.hostname = condement_config['hostname']
+        server.vm.hostname = condement_config['os']['hostname']
 
         server.vm.provider :virtualbox do |v|
             # Configure basic VM settings
-            v.name = condement_config['hostname']
+            v.name = condement_config['os']['hostname']
             v.gui = condement_config['show_gui']
 
             # Configure resources available to the VM
-            v.cpus = condement_config['cpus']
-            v.memory = condement_config['memory_mb']
+            v.cpus = condement_config['resource']['cpus']
+            v.memory = condement_config['resource']['memory_mb']
 
             # Configure clipboard and drag and drop for ease of use
             v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
@@ -22,12 +22,12 @@ Vagrant.configure(2) do |config|
 
             # Configure the display
             accelerate3d = 'off'
-            if (condement_config['video_3d_acceleration']) then
+            if (condement_config['resource']['video_3d_acceleration']) then
                 accelerate3d = 'on'
             end
 
             v.customize ['modifyvm', :id, '--accelerate3d', accelerate3d]
-            v.customize ['modifyvm', :id, '--vram', condement_config['video_memory_mb']]
+            v.customize ['modifyvm', :id, '--vram', condement_config['resource']['video_memory_mb']]
         end
 
         # Update the system
@@ -45,13 +45,13 @@ Vagrant.configure(2) do |config|
 
         # Set the keyboard language
         config.vm.provision "shell", inline: "sudo chmod 777 /etc/default/keyboard" # Change permissions so that file copy works
-        config.vm.provision 'file', source: "./keyboard_layouts/" + condement_config['keyboard_layout'], destination: '/etc/default/keyboard'
+        config.vm.provision 'file', source: "./keyboard_layouts/" + condement_config['os']['keyboard_layout'], destination: '/etc/default/keyboard'
 
         # Install the desktop
-        if (condement_config['desktop'] && condement_config['desktop'] != 'none') then
+        if (condement_config['os']['desktop'] && condement_config['os']['desktop'] != 'none') then
             config.vm.provision 'puppet' do |puppet|
                 puppet.manifests_path = "desktops"
-                puppet.manifest_file = condement_config['desktop'] + ".pp"
+                puppet.manifest_file = condement_config['os']['desktop'] + ".pp"
             end
         end
 
@@ -64,10 +64,11 @@ Vagrant.configure(2) do |config|
             end
         end
 
-        # Configure the work folder
-        server.vm.synced_folder condement_config['host_work_dir'], "/mnt/work/"
+        # # Configure the work folder
+        # server.vm.synced_folder condement_config['host_work_dir'], "/mnt/work/"
+        # server.vm.provision 'shell', inline: 'echo "mnt_work_    /mnt/work    vboxsf    defaults    0    0" | sudo tee -a /etc/fstab'
 
-        # Restart the VM
-        config.vm.provision "shell", inline: "reboot"
+        # # Start the desktop
+        # config.vm.provision "shell", inline: "sudo reboot"
     end
 end
