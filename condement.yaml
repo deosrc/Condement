@@ -5,5 +5,6 @@ video_3d_acceleration: true
 keyboard_layout: "en_gb"
 hostname: "condement"
 host_work_dir: "C:\\Users\\Dale"
+desktop: "ubuntu"
 show_gui: true
-puppet_files_to_apply: ['desktop', 'vscode', 'docker']
+puppet_files_to_apply: ['vscode', 'docker']
