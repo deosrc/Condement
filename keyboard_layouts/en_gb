@@ -1,6 +1,4 @@
-file { '/etc/default/keyboard':
-  ensure  => file,
-  content => '# KEYBOARD CONFIGURATION FILE
+# KEYBOARD CONFIGURATION FILE
 
 # Consult the keyboard(5) manual page.
 
@@ -9,5 +7,4 @@ XKBLAYOUT="gb"
 XKBVARIANT=""
 XKBOPTIONS="lv3:ralt_switch"
 
-BACKSPACE="guess"'
-}
+BACKSPACE="guess"
