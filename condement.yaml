@@ -9,4 +9,4 @@ os:
   keyboard_layout: "en_gb"
   desktop: "ubuntu"
 host_work_dir: "C:\\Users\\Dale\\Repos"
-software: ['vscode', 'docker']
+software: ['vscode', 'docker', 'k3s']
