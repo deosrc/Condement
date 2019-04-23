@@ -1,15 +1,48 @@
+################################
+# Condement Sample Config File #
+################################
+
+# Determines if VirtualBox should show the Virtual Machine display once it is created.
 show_gui: true
+
 resource:
+  # The number of virtual CPUs to configure on the Virtual Machine.
+  # This should be equal to or less than the number of CPU cores on your host.
   cpus: 2
+
+  # The amount of memory to attach to the Virtual Machine in Megabytes.
+  # This should be less than the amount of free memory on your host machine otherwise you will encounter performance issues.
   memory_mb: 8192
+
+  # The amount of video memory to assign to the Virtual Machine in Megabytes.
+  # This should be between 1 and 128.
   video_memory_mb: 128
+
+  # Determines if 3D video acceleration should be enabled.
   video_3d_acceleration: true
+
 os:
+  # The hostname of the Virtual Machine.
+  # This is also used for the Virtual Machine name in VirtualBox.
   hostname: "condement"
+
+  # The name of the file to apply for the keyboard layout.
+  # See the "keyboard_layouts" folder.
   keyboard_layout: "en_gb"
+
+  # The name of the desktop environment to install.
+  # See the "desktops" folder.
   desktop: "ubuntu"
+
+# The software to install to the Virtual Machine.
+# Each entry must match with a puppet file in the "software" folder.
 software: ['vscode', 'docker', 'k3s', 'firefox']
-folders:
+
+# A list of the folders to map between the host and Virtual Machine.
+host_folders:
+  # The host folder name should be unique and use only the characters [A-Z0-9_] for best compatibility.
   repos:
+    # The source folder on the host to mount into the Virtual Machine.
     source: "C:\\Users\\Dale\\Repos"
+    # The target folder inside the Virtual Machine to mount the folder to.
     target: "/home/dev/Repos"
