@@ -10,3 +10,7 @@ os:
   desktop: "ubuntu"
 host_work_dir: "C:\\Users\\Dale\\Repos"
 software: ['vscode', 'docker', 'k3s', 'firefox']
+host_folders:
+  repos:
+    source: "C:\\Users\\Dale\\Repos"
+    target: "/home/dev/Repos"

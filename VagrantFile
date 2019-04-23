@@ -28,7 +28,19 @@ Vagrant.configure(2) do |config|
 
             v.customize ['modifyvm', :id, '--accelerate3d', accelerate3d]
             v.customize ['modifyvm', :id, '--vram', condement_config['resource']['video_memory_mb']]
+
+            # Configure each host_folder as a permanent share
+            condement_config['host_folders'].each do |folder_name, folder|
+                v.customize ['sharedfolder', 'add', :id, '--name', folder_name, '--hostpath', folder['source']]
+            end
         end
+
+        # Configure each host_folder share in it's mount point
+        config.vm.provision 'shell', inline: 'sudo chmod 666 /etc/fstab'
+        condement_config['host_folders'].each do |folder_name, folder|
+            config.vm.provision 'shell', inline: 'echo "' + folder_name + '    ' + folder['target'] + '    vboxsf    defaults    0    0" >> /etc/fstab'
+        end
+        config.vm.provision 'shell', inline: 'sudo chmod 644 /etc/fstab'
 
         # Update the system
         config.vm.provision "shell", inline: "sudo apt update"
@@ -64,11 +76,7 @@ Vagrant.configure(2) do |config|
             end
         end
 
-        # # Configure the work folder
-        # server.vm.synced_folder condement_config['host_work_dir'], "/mnt/work/"
-        # server.vm.provision 'shell', inline: 'echo "mnt_work_    /mnt/work    vboxsf    defaults    0    0" | sudo tee -a /etc/fstab'
-
-        # # Start the desktop
-        # config.vm.provision "shell", inline: "sudo reboot"
+        # Start the desktop
+        config.vm.provision "shell", inline: "sudo reboot"
     end
 end

@@ -8,5 +8,8 @@ os:
   hostname: "condement"
   keyboard_layout: "en_gb"
   desktop: "ubuntu"
-host_work_dir: "C:\\Users\\Dale\\Repos"
 software: ['vscode', 'docker', 'k3s', 'firefox']
+folders:
+  repos:
+    source: "C:\\Users\\Dale\\Repos"
+    target: "/home/dev/Repos"
