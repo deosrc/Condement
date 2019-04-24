@@ -29,7 +29,8 @@ exec { 'systemd-reload':
 service { 'k3s':
   ensure  => running,
   enable  => true,
-  require => [ File['/etc/systemd/system/k3s.service'], Exec['systemd-reload'] ]
+  require => [ File['/etc/systemd/system/k3s.service'], Exec['systemd-reload'] ],
+  notify  => Exec['pause-for-startup']
 }
 
 # Create alias for standard kubernetes commands to k3s
@@ -47,4 +48,10 @@ file_line { 'k3s-aliases-import':
   ensure => present,
   path   => '/home/dev/.bashrc',
   line   => 'source ~/.k3s-aliases'
+}
+
+# Pause briefly once installed to give the service time to start fully.
+exec { 'pause-for-startup':
+  command     => 'sleep 5s',
+  refreshonly => true
 }
