@@ -30,17 +30,21 @@ Vagrant.configure(2) do |config|
             v.customize ['modifyvm', :id, '--vram', condement_config['resource']['video_memory_mb']]
 
             # Configure each host_folder as a permanent share
-            condement_config['host_folders'].each do |folder_name, folder|
-                v.customize ['sharedfolder', 'add', :id, '--name', folder_name, '--hostpath', folder['source']]
+            if (condement_config['host_folders'] != nil) then
+                condement_config['host_folders'].each do |folder_name, folder|
+                    v.customize ['sharedfolder', 'add', :id, '--name', folder_name, '--hostpath', folder['source']]
+                end
             end
         end
 
         # Configure each host_folder share in it's mount point
-        config.vm.provision 'shell', inline: 'sudo chmod 666 /etc/fstab'
-        condement_config['host_folders'].each do |folder_name, folder|
-            config.vm.provision 'shell', inline: 'echo "' + folder_name + '    ' + folder['target'] + '    vboxsf    defaults    0    0" >> /etc/fstab'
+        if (condement_config['host_folders'] != nil) then
+            config.vm.provision 'shell', inline: 'sudo chmod 666 /etc/fstab'
+            condement_config['host_folders'].each do |folder_name, folder|
+                config.vm.provision 'shell', inline: 'echo "' + folder_name + '    ' + folder['target'] + '    vboxsf    defaults    0    0" >> /etc/fstab'
+            end
+            config.vm.provision 'shell', inline: 'sudo chmod 644 /etc/fstab'
         end
-        config.vm.provision 'shell', inline: 'sudo chmod 644 /etc/fstab'
 
         # Update the system
         config.vm.provision "shell", inline: "sudo apt update"
