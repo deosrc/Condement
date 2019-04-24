@@ -32,7 +32,7 @@ os:
 
   # The name of the desktop environment to install.
   # See the "desktops" folder.
-  desktop: "ubuntu"
+  desktop: "xubuntu"
 
 # The software to install to the Virtual Machine.
 # Each entry must match with a puppet file in the "software" folder.
