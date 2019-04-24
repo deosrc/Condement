@@ -9,26 +9,26 @@ This project was started due to various issues encountered while trying to devel
 The environment can be configure with a simple yaml file but as default you should end up with:
 
 * Ubuntu 18.04 (LTS) with various desktop options:
-  * Xubuntu
-  * Lubuntu
-  * Ubuntu Budgie
+  * [Xubuntu](https://xubuntu.org/)
+  * [Lubuntu](http://lubuntu.me/)
+  * [Ubuntu Budgie](https://ubuntubudgie.org/)
 * A 'dev' user with sudo (password: 'condement')
 * Files persisted to your host machine
-* Visual Studio Code
-* Docker
-* Kubernetes (via [k3s](http://k3s.io))
+* [Visual Studio Code](https://code.visualstudio.com/)
+* [Docker](https://www.docker.com/)
+* [Kubernetes](https://kubernetes.io/) (via [k3s](http://k3s.io))
+  * [Kubernetes Dashboard](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
 
 Comming soon should also be:
 
 * Git
-* Kubernetes Dashboard
 
 ## Prerequisites
 
 In order to run this, you will need the following installed:
 
-* VirtualBox
-* Vagrant
+* [VirtualBox](https://www.virtualbox.org/)
+* [Vagrant](https://www.vagrantup.com/)
 
 ## Configuration
 
