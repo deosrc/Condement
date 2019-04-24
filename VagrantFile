@@ -39,25 +39,25 @@ Vagrant.configure(2) do |config|
 
         # Configure each host_folder share in it's mount point
         if (condement_config['host_folders'] != nil) then
-            config.vm.provision 'shell', inline: 'sudo chmod 666 /etc/fstab'
             condement_config['host_folders'].each do |folder_name, folder|
-                config.vm.provision 'shell', inline: 'echo "' + folder_name + '    ' + folder['target'] + '    vboxsf    defaults    0    0" >> /etc/fstab'
+                config.vm.provision "shell" do |s|
+                    s.path = './system_base/add_host_folder.sh'
+                    s.args = [ folder_name, folder['target'] ]
+                end
             end
-            config.vm.provision 'shell', inline: 'sudo chmod 644 /etc/fstab'
         end
 
         # Update the system
-        config.vm.provision "shell", inline: "sudo apt update"
-        config.vm.provision "shell", inline: "sudo apt upgrade -y"
+        config.vm.provision "shell", inline: "apt update"
+        config.vm.provision "shell", inline: "apt upgrade -y"
 
         # Install puppet
-        config.vm.provision "shell", inline: "sudo apt install -y puppet"
-        config.vm.provision "shell", inline: "sudo puppet module install puppetlabs-stdlib --version 5.2.0"
+        config.vm.provision "shell", path: "./system_base/install_puppet.sh"
 
         # Run puppet base
         config.vm.provision 'puppet' do |puppet|
-            puppet.manifests_path = "puppet_base"
-            puppet.manifest_file = "base.pp"
+            puppet.manifests_path = "system_base"
+            puppet.manifest_file = "puppet_base.pp"
         end
 
         # Set the keyboard language
@@ -82,6 +82,6 @@ Vagrant.configure(2) do |config|
         end
 
         # Start the desktop
-        config.vm.provision "shell", inline: "sudo reboot"
+        config.vm.provision "shell", inline: "reboot"
     end
 end
