@@ -1,6 +1,8 @@
 #######################################
 # Install k3s
 #######################################
+# This file must use LF line endings!
+#######################################
 
 # Set the default path for all exec resources in this file.
 Exec {
@@ -28,4 +30,21 @@ service { 'k3s':
   ensure  => running,
   enable  => true,
   require => [ File['/etc/systemd/system/k3s.service'], Exec['systemd-reload'] ]
+}
+
+# Create alias for standard kubernetes commands to k3s
+$alias_file = "
+alias kubectl='k3s kubectl'
+alias crictl='k3s crictl'
+"
+file { '/home/dev/.k3s-aliases':
+  ensure  => file,
+  content => $alias_file,
+  require => Service['k3s']
+}
+
+file_line { 'k3s-aliases-import':
+  ensure => present,
+  path   => '/home/dev/.bashrc',
+  line   => 'source ~/.k3s-aliases'
 }
