@@ -36,7 +36,7 @@ os:
 
 # The software to install to the Virtual Machine.
 # Each entry must match with a puppet file in the "software" folder.
-software: ['vscode', 'docker', 'k3s', 'k3s-dashboard', 'firefox']
+software: ['vscode', 'docker', 'k3s', 'k3s-dashboard', 'firefox', 'golang']
 
 # A list of the folders to map between the host and Virtual Machine.
 host_folders:
