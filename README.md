@@ -44,3 +44,32 @@ Setup is easy. Just makes sure you have the [prerequisites](#prerequisites) inst
 4. Run `vagrant up`
 
 Once the Virtual Machine has finished building, you should be able to log in to the 'dev' account using the Ubuntu Desktop and the password 'condement'.
+
+## Advanced
+
+### Sharing your .gitconfig between the host and Condement
+
+#### Symlinking
+
+This is the simplest method but means that files paths likely won't work correctly (i.e. defining the default editor).
+
+1. Enable host_folders persistent storage
+2. Move the .gitconfig file from your home directory to the persistent storage folder (`C:\CondementPersistent` by default)
+3. Create a symlink from your home directory on the host machine using the command `mklink .gitconfig C:\CondementPersistent\.gitconfig`
+
+#### Including
+
+**Requires git 1.7.10 or higher.**
+
+This method allows you to share only part of your .gitconfig file for better functionality but requires more setup.
+
+1. Enable host_folders persistent storage
+2. Move the .gitconfig file from your home directory to the persistent storage folder (`C:\CondementPersistent` by default)
+3. Edit the new .gitconfig file in the persistent storage folder to include only the parts you wish to use within Condement.
+4. Edit the .gitconfig file in your user home directory to include only the parts removed from the persistent storage version folder.
+5. Add the following lines to the bottom of your .gitconfig file:
+
+```ini
+[include]
+    path = C:/CondementPersistent/.gitconfig
+```

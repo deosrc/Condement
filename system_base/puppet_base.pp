@@ -16,15 +16,25 @@ file { '/home/dev/.config':
   require => User['dev']
 }
 
+# Link the .gitconfig file into the persistent storage
+$gitconfig = "
+[include]
+    path = /mnt/persistent_storage/.gitconfig
+"
+file { '/home/dev/.gitconfig':
+  ensure  => file,
+  owner   => 'dev',
+  group   => 'dev',
+  content => $gitconfig,
+  require => User['dev']
+}
+
 #######################################
 # Create folder to be used by software
 # for persistent storage 
 #######################################
 file { '/mnt/persistent_storage':
-  ensure  => directory,
-  owner   => 'dev',
-  group   => 'dev',
-  require => User['dev']
+  ensure  => directory
 }
 
 #######################################
