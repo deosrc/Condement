@@ -46,3 +46,9 @@ host_folders:
     source: "C:\\Users\\Dale\\Repos"
     # The target folder inside the Virtual Machine to mount the folder to.
     target: "/home/dev/Repos"
+
+  # The host_folder below is a special entry. Installed software will map their configuration files to /mnt/persistent_storage.
+  # This allows settings such as editor preferences to remain between Virtual Machine rebuilds.
+  persistent_storage:
+    source: "C:\\CondementPersistent"
+    target: "/mnt/persistent_storage"

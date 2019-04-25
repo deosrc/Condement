@@ -9,4 +9,5 @@ fi
 HOST_FOLDER_NAME=$1
 TARGET_DIRECTORY=$2
 
+mkdir -p $TARGET_DIRECTORY
 echo "$HOST_FOLDER_NAME    $TARGET_DIRECTORY    vboxsf    defaults    0    0" >> /etc/fstab

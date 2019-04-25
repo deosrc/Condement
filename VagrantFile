@@ -37,16 +37,6 @@ Vagrant.configure(2) do |config|
             end
         end
 
-        # Configure each host_folder share in it's mount point
-        if (condement_config['host_folders'] != nil) then
-            condement_config['host_folders'].each do |folder_name, folder|
-                config.vm.provision "shell" do |s|
-                    s.path = './system_base/add_host_folder.sh'
-                    s.args = [ folder_name, folder['target'] ]
-                end
-            end
-        end
-
         # Update the system
         config.vm.provision "shell", inline: "apt update"
         config.vm.provision "shell", inline: "apt upgrade -y"
@@ -59,6 +49,17 @@ Vagrant.configure(2) do |config|
             puppet.manifests_path = "system_base"
             puppet.manifest_file = "puppet_base.pp"
         end
+
+        # Configure each host_folder share in it's mount point
+        if (condement_config['host_folders'] != nil) then
+            condement_config['host_folders'].each do |folder_name, folder|
+                config.vm.provision "shell" do |s|
+                    s.path = './system_base/add_host_folder.sh'
+                    s.args = [ folder_name, folder['target'] ]
+                end
+            end
+        end
+        config.vm.provision "shell", inline: "mount -a"
 
         # Set the keyboard language
         config.vm.provision "shell", inline: "sudo chmod 777 /etc/default/keyboard" # Change permissions so that file copy works

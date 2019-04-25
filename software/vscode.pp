@@ -17,3 +17,26 @@ package { 'visual-studio-code':
   source   => '/opt/vscode.deb',
   require  => [ Exec['vscode-deb-download'], Package['libxss1'] ]
 }
+
+# Configure folders for persistent storage
+file { [
+    '/mnt/persistent_storage/vscode',
+    '/mnt/persistent_storage/vscode/user_home',
+    '/mnt/persistent_storage/vscode/user_config'
+  ]:
+  ensure => directory,
+  owner  => 'dev',
+  group  => 'dev'
+}
+
+file { '/home/dev/.vscode':
+  ensure  => link,
+  target  => '/mnt/persistent_storage/vscode/user_home',
+  require => File['/mnt/persistent_storage/vscode/user_home']
+}
+
+file { '/home/dev/.config/Code':
+  ensure  => link,
+  target  => '/mnt/persistent_storage/vscode/user_config',
+  require => File['/mnt/persistent_storage/vscode/user_config']
+}

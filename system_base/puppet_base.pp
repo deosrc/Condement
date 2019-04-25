@@ -9,6 +9,24 @@ user { 'dev':
   groups     => ['adm', 'sudo']
 }
 
+file { '/home/dev/.config':
+  ensure  => directory,
+  owner   => 'dev',
+  group   => 'dev',
+  require => User['dev']
+}
+
+#######################################
+# Create folder to be used by software
+# for persistent storage 
+#######################################
+file { '/mnt/persistent_storage':
+  ensure  => directory,
+  owner   => 'dev',
+  group   => 'dev',
+  require => User['dev']
+}
+
 #######################################
 # Install VirtualBox Guest Additions
 #######################################
