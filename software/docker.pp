@@ -57,3 +57,19 @@ exec { 'add-docker-group-to-dev-user':
   command => 'usermod -G docker -a dev',
   require => Package['docker-ce']
 }
+
+# Persist ~/.docker/config.json (has credentials for registries)
+file { [
+    '/mnt/persistent_storage/docker',
+    '/mnt/persistent_storage/docker/user_home'
+  ]:
+  ensure => directory,
+  owner  => 'dev',
+  group  => 'dev'
+}
+
+file { '/home/dev/.docker':
+  ensure  => link,
+  target  => '/mnt/persistent_storage/docker/user_home',
+  require => File['/mnt/persistent_storage/docker/user_home']
+}
