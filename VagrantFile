@@ -41,6 +41,10 @@ Vagrant.configure(2) do |config|
         config.vm.provision "shell", inline: "apt update"
         config.vm.provision "shell", inline: "apt upgrade -y"
 
+        # Set the keyboard language
+        config.vm.provision "shell", inline: "sudo chmod 777 /etc/default/keyboard" # Change permissions so that file copy works
+        config.vm.provision 'file', source: "./keyboard_layouts/" + condement_config['os']['keyboard_layout'], destination: '/etc/default/keyboard'
+
         # Install puppet
         config.vm.provision "shell", path: "./system_base/install_puppet.sh"
 
@@ -60,10 +64,6 @@ Vagrant.configure(2) do |config|
             end
         end
         config.vm.provision "shell", inline: "mount -a"
-
-        # Set the keyboard language
-        config.vm.provision "shell", inline: "sudo chmod 777 /etc/default/keyboard" # Change permissions so that file copy works
-        config.vm.provision 'file', source: "./keyboard_layouts/" + condement_config['os']['keyboard_layout'], destination: '/etc/default/keyboard'
 
         # Install the desktop
         if (condement_config['os']['desktop'] && condement_config['os']['desktop'] != 'none') then
