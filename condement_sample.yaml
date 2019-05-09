@@ -21,6 +21,9 @@ resource:
   # Determines if 3D video acceleration should be enabled.
   video_3d_acceleration: true
 
+  # The number of monitors to set for the VM. Secondary monitor may need enabling in the view menu before being used.
+  monitor_count: 2
+
 os:
   # The hostname of the Virtual Machine.
   # This is also used for the Virtual Machine name in VirtualBox.

@@ -28,6 +28,7 @@ Vagrant.configure(2) do |config|
 
             v.customize ['modifyvm', :id, '--accelerate3d', accelerate3d]
             v.customize ['modifyvm', :id, '--vram', condement_config['resource']['video_memory_mb']]
+            v.customize ['modifyvm', :id, '--monitorcount', condement_config['resource']['monitor_count']]
 
             # Configure each host_folder as a permanent share
             if (condement_config['host_folders'] != nil) then
