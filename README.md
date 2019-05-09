@@ -14,14 +14,16 @@ The environment can be configured with a simple yaml file but as default you sho
   * [Ubuntu Budgie](https://ubuntubudgie.org/)
 * A 'dev' user with sudo (password: 'condement')
 * Files persisted to your host machine
-* [Visual Studio Code](https://code.visualstudio.com/)
-* [Docker](https://www.docker.com/)
-* [Kubernetes](https://kubernetes.io/) (via [k3s](http://k3s.io))
-  * [Kubernetes Dashboard](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
-
-Comming soon should also be:
-
-* Git
+* Container Hosting
+  * [Docker](https://www.docker.com/)
+  * [Kubernetes](https://kubernetes.io/) (via [k3s](http://k3s.io))
+    * [Kubernetes Dashboard](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
+* Developer Tools
+  * [Visual Studio Code](https://code.visualstudio.com/)
+  * [Azure Data Studio](https://docs.microsoft.com/en-us/sql/azure-data-studio/what-is?view=sql-server-2017)
+* Browsers
+  * [Firefox](https://www.mozilla.org/en-US/firefox/new/)
+  * [Chromium](https://www.chromium.org/Home)
 
 ## Prerequisites
 
