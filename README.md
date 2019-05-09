@@ -6,7 +6,7 @@ This project was started due to various issues encountered while trying to devel
 
 ## The Result
 
-The environment can be configure with a simple yaml file but as default you should end up with:
+The environment can be configured with a simple yaml file but as default you should end up with:
 
 * Ubuntu 18.04 (LTS) with various desktop options:
   * [Xubuntu](https://xubuntu.org/)
