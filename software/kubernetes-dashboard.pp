@@ -7,8 +7,14 @@ Exec {
   path => ['/usr/local/sbin','/usr/local/bin','/usr/sbin','/usr/bin','/sbin','/bin']
 }
 
-exec { 'k3s-dashboard':
-  command  => 'k3s kubectl apply -f /vagrant/kubernetes/k3s-dashboard.yml'
+exec { 'kubernetes-dashboard':
+  command  => 'k3s kubectl apply -f /vagrant/kubernetes/kubernetes-dashboard.yml'
+}
+
+host { 'k8s.localtest.me':
+  ensure  => present,
+  comment => 'Kubernetes Dashboard on localhost',
+  ip      => '127.0.0.1'
 }
 
 file { '/etc/kubernetes_logo.png':

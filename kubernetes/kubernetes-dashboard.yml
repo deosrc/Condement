@@ -185,6 +185,10 @@ metadata:
   labels:
     k8s-app: kubernetes-dashboard
 spec:
-  backend:
-    serviceName: kubernetes-dashboard
-    servicePort: 80
+  rules:
+  - host: k8s.localtest.me
+    http:
+      paths:
+      - backend:
+          serviceName: kubernetes-dashboard
+          servicePort: 80
