@@ -56,8 +56,8 @@ Once the Virtual Machine has finished building, you should be able to log in to 
 This is the simplest method but means that files paths likely won't work correctly (i.e. defining the default editor).
 
 1. Enable host_folders persistent storage
-2. Move the .gitconfig file from your home directory to the persistent storage folder (`C:\CondementPersistent` by default)
-3. Create a symlink from your home directory on the host machine using the command `mklink .gitconfig C:\CondementPersistent\.gitconfig`
+2. Move the .gitconfig file from your home directory to the persistent storage folder (`$HOME\CondementPersistent` by default)
+3. Create a symlink from your home directory on the host machine using the command `mklink .gitconfig $HOME\CondementPersistent\.gitconfig`
 
 #### Including
 
@@ -73,5 +73,5 @@ This method allows you to share only part of your .gitconfig file for better fun
 
 ```ini
 [include]
-    path = C:/CondementPersistent/.gitconfig
+    path = ~/CondementPersistent/.gitconfig
 ```
