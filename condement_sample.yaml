@@ -46,12 +46,12 @@ host_folders:
   # The host folder name should be unique and use only the characters [A-Z0-9_] for best compatibility.
   repos:
     # The source folder on the host to mount into the Virtual Machine.
-    source: "C:\\Users\\Dale\\Repos"
+    source: "~\\Repos"
     # The target folder inside the Virtual Machine to mount the folder to.
     target: "/home/dev/Repos"
 
   # The host_folder below is a special entry. Installed software will map their configuration files to /mnt/persistent_storage.
   # This allows settings such as editor preferences to remain between Virtual Machine rebuilds.
   persistent_storage:
-    source: "C:\\CondementPersistent"
+    source: "~\\CondementPersistent"
     target: "/mnt/persistent_storage"
