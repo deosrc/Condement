@@ -9,7 +9,10 @@ user { 'dev':
   groups     => ['adm', 'sudo']
 }
 
-file { '/home/dev/.config':
+file { [
+  '/home/dev/.config',
+  '/home/dev/Desktop']:
+
   ensure  => directory,
   owner   => 'dev',
   group   => 'dev',

@@ -1,0 +1,7 @@
+[Desktop Entry]
+Version=1.0
+Type=Link
+Name=Kubernetes Dashboard
+Comment=Dashboard for managing Kubernetes Clusters
+Icon=/etc/kubernetes_logo.png
+URL=http://localhost/
