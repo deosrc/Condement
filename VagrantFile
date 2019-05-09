@@ -3,7 +3,7 @@ require 'yaml'
 condement_config = YAML.load_file('./condement.yaml')
 
 Vagrant.configure(2) do |config|
-    config.vm.define "Condement" do |server|
+    config.vm.define condement_config['os']['hostname'] do |server|
         server.vm.box = "ubuntu/bionic64"
         server.vm.hostname = condement_config['os']['hostname']
 
