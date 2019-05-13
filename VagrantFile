@@ -1,5 +1,8 @@
 require 'yaml'
 
+if (!File.file?('./condement.yaml')) then
+    raise "Configuration file '" + File.expand_path('./condement.yaml') + "' does not exist. To get started, create and modify a copy of condement_sample.yaml"
+end
 condement_config = YAML.load_file('./condement.yaml')
 
 Vagrant.configure(2) do |config|
