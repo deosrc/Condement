@@ -36,7 +36,13 @@ Vagrant.configure(2) do |config|
             # Configure each host_folder as a permanent share
             if (condement_config['host_folders'] != nil) then
                 condement_config['host_folders'].each do |folder_name, folder|
-                    v.customize ['sharedfolder', 'add', :id, '--name', folder_name, '--hostpath', File.expand_path(folder['source'])]
+                    absolute_path = File.expand_path(folder['source'])
+
+                    if (!File.directory?(absolute_path)) then
+                        raise "Directory '" + absolute_path + "' does not exist on the host."
+                    end
+
+                    v.customize ['sharedfolder', 'add', :id, '--name', folder_name, '--hostpath', absolute_path]
                 end
             end
         end
