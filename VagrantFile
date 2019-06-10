@@ -1,4 +1,5 @@
 require 'yaml'
+require 'fileutils'
 
 if (!File.file?('./condement.yaml')) then
     raise "Configuration file '" + File.expand_path('./condement.yaml') + "' does not exist. To get started, create and modify a copy of condement_sample.yaml"
@@ -36,7 +37,19 @@ Vagrant.configure(2) do |config|
             # Configure each host_folder as a permanent share
             if (condement_config['host_folders'] != nil) then
                 condement_config['host_folders'].each do |folder_name, folder|
-                    absolute_path = File.expand_path(folder['source'])
+                    if (folder['source'] == nil) then
+                        raise "Source is required for host_folder #{folder_name}"
+                    end
+                    if (folder['target'] == nil) then
+                        raise "Target is required for host_folder #{folder_name}"
+                    end
+
+                    absolute_path = File.expand_path(folder['source']) || ""
+
+                    if (folder_name == 'persistent_storage') then
+                        absolute_path.gsub! '<hostname>', condement_config['os']['hostname']
+                        FileUtils.mkdir_p absolute_path
+                    end
 
                     if (!File.directory?(absolute_path)) then
                         raise "Directory '" + absolute_path + "' does not exist on the host."

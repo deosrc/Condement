@@ -66,5 +66,5 @@ host_folders:
   # The host_folder below is a special entry. Installed software will map their configuration files to /mnt/persistent_storage.
   # This allows settings such as editor preferences to remain between Virtual Machine rebuilds.
   persistent_storage:
-    source: "~\\CondementPersistent"
-    target: "/mnt/persistent_storage"
+    source: "~\\CondementPersistent\\<hostname>"
+    target: "/mnt/persistent_storage/<hostname>"
