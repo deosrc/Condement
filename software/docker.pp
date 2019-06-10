@@ -53,6 +53,11 @@ package { 'docker-ce':
   require => Exec['add-docker-repository']
 }
 
+package { 'docker-compose':
+  ensure  => present,
+  require => Package['docker-ce']
+}
+
 exec { 'add-docker-group-to-dev-user':
   command => 'usermod -G docker -a dev',
   require => Package['docker-ce']
