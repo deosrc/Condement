@@ -7,15 +7,17 @@ exec { 'vscode-deb-download':
   creates => '/opt/vscode.deb'
 }
 
-package { 'libxss1':
-  ensure => present
+package { [ 'libxss1',
+            'libnss3',
+            'libsecret-1-0' ]:
+  ensure  => present
 }
 
 package { 'visual-studio-code':
   ensure   => present,
   provider => 'dpkg',
   source   => '/opt/vscode.deb',
-  require  => [ Exec['vscode-deb-download'], Package['libxss1'] ]
+  require  => [ Exec['vscode-deb-download'], Package['libxss1', 'libnss3', 'libsecret-1-0'] ]
 }
 
 # Configure folders for persistent storage

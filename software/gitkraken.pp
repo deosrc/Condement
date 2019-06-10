@@ -11,7 +11,9 @@ package { [
     'gconf2',
     'gconf-service',
     'python',
-    'gvfs-bin'
+    'gvfs-bin',
+    'libgtk2.0-0',
+    'xdg-utils'
   ]:
   ensure => present
 }
