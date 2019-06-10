@@ -6,6 +6,14 @@ if (!File.file?('./condement.yaml')) then
 end
 condement_config = YAML.load_file('./condement.yaml')
 
+this_condement_version = 0.2
+
+if (condement_config['condement_version'] == nil) then
+    raise 'condement_version must be specified'
+elsif (condement_config['condement_version'] > this_condement_version) then
+    raise "Condement file is for version #{condement_config['condement_version']} but installed version is #{this_condement_version}. To use this configuration file, you will need to upgrade condement."
+end
+
 Vagrant.configure(2) do |config|
     config.vm.define condement_config['os']['hostname'] do |server|
         server.vm.box = "ubuntu/bionic64"
