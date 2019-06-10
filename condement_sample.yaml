@@ -37,6 +37,9 @@ os:
   # See the "desktops" folder.
   desktop: "xubuntu"
 
+# Determines if packages should be updated when provisioning
+update_packages: true
+
 # The software to install to the Virtual Machine.
 # Each entry must match with a puppet file in the "software" folder.
 software: [
