@@ -70,7 +70,7 @@ Vagrant.configure(2) do |config|
 
         # Update the system
         config.vm.provision "shell", inline: "apt update"
-        config.vm.provision "shell", inline: "apt upgrade -y"
+        config.vm.provision "shell", inline: "DEBIAN_FRONTEND=noninteractive apt upgrade -y"
 
         # Set the keyboard language
         config.vm.provision "shell", inline: "sudo chmod 777 /etc/default/keyboard" # Change permissions so that file copy works
