@@ -70,3 +70,10 @@ host_folders:
   persistent_storage:
     source: "~\\CondementPersistent\\<hostname>"
     target: "/mnt/persistent_storage/<hostname>"
+
+# A list of ports to forward from the host to the vm (e.g. so that http://localhost:8080 from the host will direct to port 80 on the VM)
+forwarded_ports:
+  http:
+    protocol: tcp
+    host_port: 8080
+    vm_port: 80

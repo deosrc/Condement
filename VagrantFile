@@ -6,7 +6,7 @@ if (!File.file?('./condement.yaml')) then
 end
 condement_config = YAML.load_file('./condement.yaml')
 
-this_condement_version = 0.2
+this_condement_version = 0.3
 
 if (condement_config['condement_version'] == nil) then
     raise 'condement_version must be specified'
@@ -65,6 +65,17 @@ Vagrant.configure(2) do |config|
 
                     v.customize ['sharedfolder', 'add', :id, '--name', folder_name, '--hostpath', absolute_path]
                 end
+            end
+        end
+
+        # Forward any specified ports
+        if (condement_config['forwarded_ports'] != nil) then
+            condement_config['forwarded_ports'].each do |service_name, port_forward|
+                if (port_forward['protocol'] = nil) then
+                    port_forward['protocol'] = "tcp"
+                end
+
+                config.vm.network 'forwarded_port', guest: port_forward['vm_port'], host: port_forward['host_port'], protocol: port_forward['protocol']
             end
         end
 
