@@ -66,10 +66,11 @@ host_folders:
     target: "/home/dev/Repos"
 
   # The host_folder below is a special entry. Installed software will map their configuration files to /mnt/persistent_storage.
-  # This allows settings such as editor preferences to remain between Virtual Machine rebuilds.
+  # This allows settings such as editor preferences to remain between Virtual Machine rebuilds. The `<hostname>` tag will be replaced
+  # by the hostname of the Virtual Machine so that you can have different settings for different machine purposes.
   persistent_storage:
     source: "~\\CondementPersistent\\<hostname>"
-    target: "/mnt/persistent_storage/<hostname>"
+    target: "/mnt/persistent_storage"
 
 # A list of ports to forward from the host to the vm (e.g. so that http://localhost:8080 from the host will direct to port 80 on the VM)
 forwarded_ports:
