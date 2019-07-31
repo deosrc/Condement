@@ -15,7 +15,7 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 
-echo "$HOST_FOLDER_NAME    $TARGET_DIRECTORY    vboxsf    defaults    0    0" >> /etc/fstab
+echo "$HOST_FOLDER_NAME    $TARGET_DIRECTORY    vboxsf    defaults,umask=022,uid=1002,gid=1002    0    0" >> /etc/fstab
 if [ $? -ne 0 ]; then
     echo "Error while adding '$HOST_FOLDER_NAME' host folder to '/etc/fstab'." 1&>2
     exit 1
