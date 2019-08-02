@@ -108,9 +108,8 @@ Vagrant.configure(2) do |config|
 
         # Install the desktop
         if (condement_config['os']['desktop'] && condement_config['os']['desktop'] != 'none') then
-            config.vm.provision 'puppet', run: "always" do |puppet|
-                puppet.manifests_path = "desktops"
-                puppet.manifest_file = condement_config['os']['desktop'] + ".pp"
+            config.vm.provision 'ansible_local', run: "always" do |ansible|
+                ansible.playbook = './desktops/' + condement_config['os']['desktop'] + '/playbook.yml'
             end
         end
 
