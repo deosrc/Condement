@@ -1,0 +1,46 @@
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: dev
+      shell: /bin/bash
+      append: yes
+      groups: [ adm, sudo ]
+      password: '$6$dPp8BPqDC0O1NL$cMhWP7ddwpfZTQJ1hFy8zqhi3o71W1QvXFsYybl4Vsc2r4qN7twOCoxHqHmAs7OhE/wkgbk5AaQoBMq8qF41C/' # condement
+
+    - name: Create user directories used in provisioning
+      with_items:
+        - .config
+        - Desktop
+      file:
+        path: "/home/dev/{{item}}"
+        state: directory
+        owner: dev
+        group: dev
+
+    - name: Create .gitconfig
+      copy:
+        dest: /home/dev/.gitconfig
+        src: .gitconfig
+        owner: dev
+        group: dev
+
+    - name: Create persistent storage directory
+      file:
+        path: /mnt/persistent_storage
+        owner: dev
+        group: dev
+
+    - name: Install VirtualBox Guest Additions
+      with_items:
+        - virtualbox-guest-dkms
+        - virtualbox-guest-utils
+        - virtualbox-guest-x11
+      package:
+        name: "{{item}}"
+
+    - name: Install packages useful to software provisioners
+      with_items:
+        - curl
+      package:
+        name: "{{item}}"

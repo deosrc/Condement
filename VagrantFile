@@ -90,10 +90,9 @@ Vagrant.configure(2) do |config|
         # Install puppet
         config.vm.provision "shell", path: "./system_base/install_puppet.sh"
 
-        # Run puppet base
-        config.vm.provision 'puppet', run: "always" do |puppet|
-            puppet.manifests_path = "system_base"
-            puppet.manifest_file = "puppet_base.pp"
+        # Run system base
+        config.vm.provision 'ansible_local', run: "always" do |ansible|
+            ansible.playbook = "./system_base/ansible_base/playbook.yml"
         end
 
         # Configure each host_folder share in it's mount point
