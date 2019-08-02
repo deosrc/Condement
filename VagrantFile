@@ -87,9 +87,6 @@ Vagrant.configure(2) do |config|
         config.vm.provision "shell", inline: "sudo chmod 777 /etc/default/keyboard" # Change permissions so that file copy works
         config.vm.provision 'file', source: "./keyboard_layouts/" + condement_config['os']['keyboard_layout'], destination: '/etc/default/keyboard', run: "always"
 
-        # Install puppet
-        config.vm.provision "shell", path: "./system_base/install_puppet.sh"
-
         # Run system base
         config.vm.provision 'ansible_local', run: "always" do |ansible|
             ansible.playbook = "./system_base/ansible_base/playbook.yml"
