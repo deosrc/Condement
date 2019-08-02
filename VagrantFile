@@ -114,12 +114,11 @@ Vagrant.configure(2) do |config|
             end
         end
 
-        # Run the puppet files identified in the configuration for install
-        puppet_files_to_apply = condement_config['software']
-        puppet_files_to_apply.each do |puppet_file|
-            config.vm.provision 'puppet', run: "always" do |puppet|
-                puppet.manifests_path = 'software'
-                puppet.manifest_file = puppet_file + '.pp'
+        # Run the software configuration files identified for install
+        software_list = condement_config['software']
+        software_list.each do |software_id|
+            config.vm.provision 'ansible_local', run: "always" do |ansible|
+                ansible.playbook = './software/' + software_id + '/playbook.yml'
             end
         end
 
