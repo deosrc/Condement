@@ -35,15 +35,17 @@
         group: dev
 
     - name: Install VirtualBox Guest Additions
-      with_items:
-        - virtualbox-guest-dkms
-        - virtualbox-guest-utils
-        - virtualbox-guest-x11
+      vars:
+        packages:
+          - virtualbox-guest-dkms
+          - virtualbox-guest-utils
+          - virtualbox-guest-x11
       package:
-        name: "{{item}}"
+        name: "{{packages}}"
 
     - name: Install packages useful to software provisioners
-      with_items:
-        - curl
+      vars:
+        packages:
+          - curl
       package:
-        name: "{{item}}"
+        name: "{{packages}}"
