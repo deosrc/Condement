@@ -1,0 +1,27 @@
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: Install Firefox Browser
+      package:
+        name: firefox
+
+# Configure folders for persistent storage
+# Disabled due to issues with stability
+# file { '/mnt/persistent_storage/firefox':
+#   ensure => directory,
+#   owner  => 'dev',
+#   group  => 'dev'
+# }
+
+# file { '/home/dev/.mozilla':
+#   ensure => directory,
+#   owner  => 'dev',
+#   group  => 'dev'
+# }
+
+# file { '/home/dev/.mozilla/firefox':
+#   ensure  => link,
+#   target  => '/mnt/persistent_storage/firefox',
+#   require => File['/mnt/persistent_storage/firefox', '/home/dev/.mozilla']
+# }
