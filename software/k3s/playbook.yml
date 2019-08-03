@@ -17,6 +17,11 @@
         enabled: yes
         state: started
 
+    - name: Change permissions on connection file
+      file:
+        path: /etc/rancher/k3s/k3s.yaml
+        mode: u=rw,g=r,o=r
+
     - name: Create aliases for standard k8s commands
       vars:
         accounts:
