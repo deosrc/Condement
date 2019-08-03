@@ -3,15 +3,16 @@
   become_user: root
   tasks:
     - name: Install dependant packages
-      with_items:
-        - gconf2
-        - gconf-service
-        - python
-        - gvfs-bin
-        - libgtk2.0-0
-        - xdg-utils
+      vars:
+        packages:
+          - gconf2
+          - gconf-service
+          - python
+          - gvfs-bin
+          - libgtk2.0-0
+          - xdg-utils
       package:
-        name: "{{item}}"
+        name: "{{packages}}"
 
     - name: Install GitKraken
       apt:

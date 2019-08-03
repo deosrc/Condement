@@ -3,12 +3,13 @@
   become_user: root
   tasks:
     - name: Install dependant packages
-      with_items:
-        - libxss1
-        - libnss3
-        - libsecret-1-0
+      vars:
+        packages:
+          - libxss1
+          - libnss3
+          - libsecret-1-0
       package:
-        name: "{{item}}"
+        name: "{{packages}}"
 
     - name: Install Visual Studio Code
       apt:
