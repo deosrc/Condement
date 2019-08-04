@@ -1,0 +1,3 @@
+alias kubectl='k3s kubectl'
+alias kc='k3s kubectl'
+alias crictl='k3s crictl'

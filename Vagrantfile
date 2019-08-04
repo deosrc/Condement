@@ -87,13 +87,9 @@ Vagrant.configure(2) do |config|
         config.vm.provision "shell", inline: "sudo chmod 777 /etc/default/keyboard" # Change permissions so that file copy works
         config.vm.provision 'file', source: "./keyboard_layouts/" + condement_config['os']['keyboard_layout'], destination: '/etc/default/keyboard', run: "always"
 
-        # Install puppet
-        config.vm.provision "shell", path: "./system_base/install_puppet.sh"
-
-        # Run puppet base
-        config.vm.provision 'puppet', run: "always" do |puppet|
-            puppet.manifests_path = "system_base"
-            puppet.manifest_file = "puppet_base.pp"
+        # Run system base
+        config.vm.provision 'ansible_local', run: "always" do |ansible|
+            ansible.playbook = "./system_base/ansible_base/playbook.yml"
         end
 
         # Configure each host_folder share in it's mount point
@@ -109,18 +105,16 @@ Vagrant.configure(2) do |config|
 
         # Install the desktop
         if (condement_config['os']['desktop'] && condement_config['os']['desktop'] != 'none') then
-            config.vm.provision 'puppet', run: "always" do |puppet|
-                puppet.manifests_path = "desktops"
-                puppet.manifest_file = condement_config['os']['desktop'] + ".pp"
+            config.vm.provision 'ansible_local', run: "always" do |ansible|
+                ansible.playbook = './desktops/' + condement_config['os']['desktop'] + '/playbook.yml'
             end
         end
 
-        # Run the puppet files identified in the configuration for install
-        puppet_files_to_apply = condement_config['software']
-        puppet_files_to_apply.each do |puppet_file|
-            config.vm.provision 'puppet', run: "always" do |puppet|
-                puppet.manifests_path = 'software'
-                puppet.manifest_file = puppet_file + '.pp'
+        # Run the software configuration files identified for install
+        software_list = condement_config['software']
+        software_list.each do |software_id|
+            config.vm.provision 'ansible_local', run: "always" do |ansible|
+                ansible.playbook = './software/' + software_id + '/playbook.yml'
             end
         end
 

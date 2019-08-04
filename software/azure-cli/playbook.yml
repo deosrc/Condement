@@ -1,0 +1,36 @@
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: Add microsoft apt key
+      apt_key:
+        url: https://packages.microsoft.com/keys/microsoft.asc
+        keyring: /etc/apt/trusted.gpg.d/microsoft.asc.gpg
+        id: BC528686B50D79E339D3721CEB3E94ADBE1229CF
+
+    - name: Add azure cli repository
+      apt_repository:
+        repo: deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ansible_distribution_release}} main
+
+    - name: Install azure cli
+      package:
+        name: azure-cli
+
+    - name: Configure persistent storage
+      block:
+        - name: Create persistent storage directories
+          with_items:
+            - azure-cli
+            - azure-cli/user_home
+          file:
+            path: "/mnt/persistent_storage/{{item}}"
+            state: directory
+            owner: dev
+            group: dev
+
+        # Persist ~/.azure directory (has credentials for azure subscriptions)
+        - name: Map user home config directory to persistent storage
+          file:
+            dest: /home/dev/.azure
+            src: /mnt/persistent_storage/azure-cli/user_home
+            state: link
