@@ -16,13 +16,13 @@ This is also used for the Virtual Machine name in VirtualBox and should be uniqu
 
 The name of the file to apply for the keyboard layout.
 
-See the [keyboard_layouts](../keyboard_layouts) directory of the repository for available options.
+See the [keyboard_layouts](../../keyboard_layouts) directory of the repository for available options.
 
 ### `desktop`
 
 The name of the desktop environment to install.
 
-See the [desktops](../desktops) directory of the repository for available options.
+See the [desktops](../../desktops) directory of the repository for available options.
 
 ## Example
 
