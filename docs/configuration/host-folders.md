@@ -32,6 +32,21 @@ This entry also allows the use of the `<hostname>` tag in the `source` property.
 of the Virtual Machine so that you can have different settings for different machine purposes. This is only available
 for the `persistent_storage` host folder.
 
+## Ownership and Permissions
+
+Due to the limitations of VirtualBox Shared Folders, the owner and permissions of files within a host folder cannot be
+modified. This is because these settings cannot map to filesystems such as NTFS.
+
+As a result and in order to provide
+best compatibility, all host folders are mounted with the `dev` user and group as the owner and use `0755` permissions.
+This results in the following:
+
+|       | Read     | Write    | Execute  |
+| ----- | -------- | -------- | -------- |
+| User  | &#10004; | &#10004; | &#10004; |
+| Group | &#10004; | &#10006; | &#10004; |
+| Other | &#10004; | &#10006; | &#10004; |
+
 ## Example
 
 ```yaml
