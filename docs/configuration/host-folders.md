@@ -5,6 +5,10 @@
 Host folders allow you to mount a directory from your host machine into the Virtual Machine. This is used to ensure
 persistent storage is available across VM rebuilds (e.g. if you break your VM, you don't lose all of your code!).
 
+> **NOTE:** Host folders currently cannot be added after a VM has been build through the usual process, however, they
+> can be added manually. For instructions on this, see
+> [Using the VM: Adding Host Folders](../using-the-vm#adding-host-folders).
+
 ## Properties
 
 Each host folder must have a unique name (which is the key) and the following properties:
