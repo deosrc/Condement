@@ -48,3 +48,26 @@ rebuilt, and will be used as a basis for determining the settings in these steps
     ```
 
 10. (Optional) Reboot the VM to ensure the mount works correctly on startup.
+
+## Adding Software
+
+New software can be added to an existing VM using the same process as initially building the VM, however, the VM may
+require a reboot so that it can attach the necessary resources. **This must be done via Vagrant**. If you have not
+restarted the VM since building it, you should be able to skip this step.
+
+1. Run the following command from the host to reboot the VM:
+
+    ```text
+    vagrant reload
+    ```
+
+2. Edit the Condement configuration file to add the required software. If you want to speed up the installation, you can
+remove all other software from the list. It will still be present on the VM after the build.
+3. Run the following add the software:
+
+    ```text
+    vagrant up
+    ```
+
+The VM will not reboot as with the original build but once Vagrant has finished, you should find the software installed
+to the VM.
