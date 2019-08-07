@@ -46,16 +46,16 @@ update_packages: true
 # Each entry must match with a puppet file in the "software" folder.
 software: [
   'vscode',
-  'azure-data-studio',
+  # 'azure-data-studio',
   'docker',
   'k3s',
   'kubernetes-dashboard',
-  'firefox',
-  'chromium',
-  'golang',
-  'gitkraken',
-  'azure-cli',
-  'powershell',
+  # 'firefox',
+  # 'chromium',
+  # 'golang',
+  # 'gitkraken',
+  # 'azure-cli',
+  # 'powershell',
   ]
 
 # A list of the folders to map between the host and Virtual Machine.
