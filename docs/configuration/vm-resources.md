@@ -2,7 +2,7 @@
 
 ## Description
 
-This section of the configuration configures the resources available to the Virtual Machine can use.
+This section configures the system resources available to the Virtual Machine such as CPU and memory.
 
 ## Properties
 
