@@ -55,6 +55,7 @@ software: [
   'golang',
   'gitkraken',
   'azure-cli',
+  'powershell',
   ]
 
 # A list of the folders to map between the host and Virtual Machine.
