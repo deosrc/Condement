@@ -22,10 +22,12 @@ In order to get started, we are going to use the sample configuration this shoul
 
 ## Building the VM
 
-Now that the configuration is in place, you can start building the VM by opening a command prompt or shell in the repository directory and running the following:
+Now that the configuration is in place, you can start building the VM by opening a command prompt or shell in the
+repository directory and running the following:
 
 ```shell
 vagrant up
 ```
 
-This will begin building the VM which will take approximately 15 minutes (depending on your system specifications). At the end of the build process, the VM will reboot into the desktop environment.
+This will begin building the VM which will take approximately 15 minutes (depending on your system specifications). At
+the end of the build process, the VM will reboot into the desktop environment.
