@@ -56,6 +56,7 @@ software: [
   # 'gitkraken',
   # 'azure-cli',
   # 'powershell',
+  # 'thunderbird',
   ]
 
 # A list of the folders to map between the host and Virtual Machine.
