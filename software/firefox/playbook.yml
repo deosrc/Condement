@@ -6,22 +6,27 @@
       package:
         name: firefox
 
-# Configure folders for persistent storage
-# Disabled due to issues with stability
-# file { '/mnt/persistent_storage/firefox':
-#   ensure => directory,
-#   owner  => 'dev',
-#   group  => 'dev'
-# }
+    - name: Configure persistent storage
+      block:
+        - name: Create persistent storage directories
+          with_items:
+            - firefox
+            - firefox/user_home
+          file:
+            path: "/mnt/persistent_storage/{{item}}"
+            state: directory
+            owner: dev
+            group: dev
 
-# file { '/home/dev/.mozilla':
-#   ensure => directory,
-#   owner  => 'dev',
-#   group  => 'dev'
-# }
+        - name: Ensure the mozilla directory exists
+          file:
+            state: directory
+            path: /home/dev/.mozilla
+            owner: dev
+            group: dev
 
-# file { '/home/dev/.mozilla/firefox':
-#   ensure  => link,
-#   target  => '/mnt/persistent_storage/firefox',
-#   require => File['/mnt/persistent_storage/firefox', '/home/dev/.mozilla']
-# }
+        - name: Map user home config directory to persistent storage
+          file:
+            dest: /home/dev/.mozilla/firefox
+            src: /mnt/persistent_storage/firefox/user_home
+            state: link
