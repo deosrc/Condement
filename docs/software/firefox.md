@@ -2,7 +2,7 @@
 
 |                             |                                                              |
 | --------------------------- | ------------------------------------------------------------ |
-| Condement Software ID       | firefox                                                      |
+| Condement Software ID       | `firefox`                                                    |
 | Website                     | [www.mozilla.org](https://www.mozilla.org/en-GB/)            |
 | License                     | [Mozilla Public License](https://www.mozilla.org/en-US/MPL/) |
 | Maintainer                  | [Deosrc](https://github.com/deosrc)                          |
