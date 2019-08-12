@@ -52,7 +52,7 @@ rebuilt, and will be used as a basis for determining the settings in these steps
 ## Adding Software
 
 New software can be added to an existing VM using the same process as initially building the VM, however, the VM will be
-rebooted so that it can attach the necessary resources. **This must be done via Vagrant as below.**
+rebooted so that it can attach the necessary resources. **The reboot must be done via Vagrant as below.**
 
 1. Edit the Condement configuration file to add the required software. If you want to speed up the installation, you can
 remove all other software from the list. Any previously installed software will still be present on the VM after the
