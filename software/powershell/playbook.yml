@@ -1,0 +1,20 @@
+- hosts: all
+  gather_facts: no
+  become: yes
+  become_user: root
+  tasks:
+    - name: Install Microsoft GPG key
+      apt:
+        deb: https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
+
+    - name: Enable universe repository
+      apt_repository:
+        repo: "{{ item }}"
+      loop:
+        - "deb http://archive.ubuntu.com/ubuntu/ bionic universe"
+        - "deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe"
+        - "deb http://security.ubuntu.com/ubuntu/ bionic-security universe"
+
+    - name: Install PowerShell
+      package:
+        name: powershell

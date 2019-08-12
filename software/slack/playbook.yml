@@ -1,0 +1,26 @@
+- hosts: all
+  become: yes
+  become_user: root
+  tasks:
+    - name: Install Slack
+      apt:
+        deb: https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.1-amd64.deb
+
+    # Seems to stop Slack from starting at the moment so disabled.
+    # - name: Configure persistent storage
+    #   block:
+    #     - name: Create persistent storage directories
+    #       with_items:
+    #         - slack
+    #         - slack/user_config
+    #       file:
+    #         path: "/mnt/persistent_storage/{{item}}"
+    #         state: directory
+    #         owner: dev
+    #         group: dev
+
+    #     - name: Map user home config directory to persistent storage
+    #       file:
+    #         dest: /home/dev/.config/Slack
+    #         src: /mnt/persistent_storage/slack/user_config
+    #         state: link

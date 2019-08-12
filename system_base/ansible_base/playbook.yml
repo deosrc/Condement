@@ -49,3 +49,16 @@
           - curl
       package:
         name: "{{packages}}"
+
+    - name: Ensure account service folders exist
+      file:
+        state: directory
+        path: /var/lib/AccountsService/users
+
+    - name: Hide vagrant and image system users
+      with_items:
+        - vagrant
+        - ubuntu
+      copy:
+        dest: "/var/lib/AccountsService/users/{{ item }}"
+        src: accounts_service_hidden_user

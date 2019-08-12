@@ -2,31 +2,24 @@
   become: yes
   become_user: root
   tasks:
-    - name: Install Firefox Browser
+    - name: Install Thunderbird
       package:
-        name: firefox
+        name: thunderbird
 
     - name: Configure persistent storage
       block:
         - name: Create persistent storage directories
           with_items:
-            - firefox
-            - firefox/user_home
+            - thunderbird
+            - thunderbird/user_home
           file:
             path: "/mnt/persistent_storage/{{item}}"
             state: directory
             owner: dev
             group: dev
 
-        - name: Ensure the mozilla directory exists
-          file:
-            state: directory
-            path: /home/dev/.mozilla
-            owner: dev
-            group: dev
-
         - name: Map user home config directory to persistent storage
           file:
-            dest: /home/dev/.mozilla/firefox
-            src: /mnt/persistent_storage/firefox/user_home
+            dest: /home/dev/.thunderbird
+            src: /mnt/persistent_storage/thunderbird/user_home
             state: link
