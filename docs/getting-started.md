@@ -9,6 +9,23 @@ To run Condement, you will need to ensure you have installed:
 
 For best compatibility, it is also advised to install the [VirtualBox Extension Pack](https://www.virtualbox.org/wiki/Downloads).
 
+## Recommended Specifications
+
+It is recommended to assign to a Condement VM at least:
+
+* 2GB Memory
+* 2 CPUs
+* 128MB Video Memory
+
+It may be possible to run on lower settings but this is not recommended. 
+
+For running a single Condement VM with the above specifications, it is recommended to have on the host as a minimum:
+
+* 4GB Memory
+* 4 CPU Cores
+
+> These are minimum specifications. Higher specifications are recommended.
+
 ## Basic Configuration
 
 In order to get started, we are going to use the sample configuration this should run on most machines:
