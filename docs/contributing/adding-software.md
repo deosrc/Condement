@@ -19,19 +19,17 @@ your install pacakge, I'll tag you in the ticket. If you don't respond, I
 reserve the right to remove the package to prevent it causing issues for more
 users.
 
-This may all seem rather strict, but is in place to ensure Condement remains
-useful, usable and does not infringe the terms of the licensed software it
-uses.
-
-## Creating the Install Package
-
-For a new install package to be accepted, it must have:
+In terms of the implementation, you must create:
 
 * An Ansible playbook with all of the necessary steps to install the software
 * An entries in the relevant configuration files
 * A documentation page
 
 The steps to create these will be convered in the next sections.
+
+This may all seem rather strict, but is in place to ensure Condement remains
+useful, usable and does not infringe the terms of the licensed software it
+uses.
 
 ## Selecting a Software ID
 
@@ -93,7 +91,13 @@ The testing levels outlined above are the minimum required for software submissi
 
 ## Adding Configuration File Entries
 
+An entry to install your software package must be added in two files:
 
+* `condement_sample.yaml`
+  * This entry allows the software to be easily discovered by users.
+  * The entry here should be commented out so that it is not installed by default. Default software requires more maintenance than other packages due to the larger user base so the decision to have software as default is reserved to the Condement team only.
+* `test/configurations/condement.level-3.yaml`
+  * This entry ensures your software is tested for compatibility when others are adding new software.
 
 ## Creating the Documentation Page
 
