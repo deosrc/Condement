@@ -52,6 +52,17 @@ package also installs a number of go pakcages which are used by the VSCode
 golang extensionin order to reduce the time to configure the machine.
 -->
 
+### Service Ports
+
+<!--
+List any services which the software package installs. This should be in the format <port>/<protocol> (e.g. 80/tcp for
+HTTP). If the service does not expose any services, this section can be removed.
+-->
+
+| Service | Ports |
+| ------- | ----- |
+|         |       |
+
 ## Limitations
 
 <!--
