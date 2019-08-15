@@ -13,14 +13,12 @@
         repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
 
     - name: Install docker
-      vars:
-        packages:
+      package:
+        name:
           - docker-ce-cli
           - containerd.io
           - docker-ce
           - docker-compose
-      package:
-        name: "{{packages}}"
 
     - name: Add docker group to dev user
       user:

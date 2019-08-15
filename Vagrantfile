@@ -90,6 +90,7 @@ Vagrant.configure(2) do |config|
         # Run system base
         config.vm.provision 'ansible_local', run: "always" do |ansible|
             ansible.playbook = "./system_base/ansible_base/playbook.yml"
+            ansible.config_file = "./system_base/ansible.cfg"
         end
 
         # Configure each host_folder share in it's mount point
@@ -107,6 +108,7 @@ Vagrant.configure(2) do |config|
         if (condement_config['os']['desktop'] && condement_config['os']['desktop'] != 'none') then
             config.vm.provision 'ansible_local', run: "always" do |ansible|
                 ansible.playbook = './desktops/' + condement_config['os']['desktop'] + '/playbook.yml'
+                ansible.config_file = "./system_base/ansible.cfg"
             end
         end
 
@@ -115,6 +117,7 @@ Vagrant.configure(2) do |config|
         software_list.each do |software_id|
             config.vm.provision 'ansible_local', run: "always" do |ansible|
                 ansible.playbook = './software/' + software_id + '/playbook.yml'
+                ansible.config_file = "./system_base/ansible.cfg"
             end
         end
 

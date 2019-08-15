@@ -1,10 +1,18 @@
 - hosts: all
   become: yes
   become_user: root
+  gather_facts: no
   tasks:
     - name: Install Slack
-      apt:
-        deb: https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.1-amd64.deb
+      block:
+        - name: Check if package is already installed
+          shell: dpkg --list | grep -E "^ii +slack"
+          ignore_errors: yes
+          register: is_slack_installed
+        - name: Download and install Slack if not present
+          when: "is_slack_installed.rc == 1"
+          apt:
+            deb: https://downloads.slack-edge.com/linux_releases/slack-desktop-4.0.1-amd64.deb
 
     # Seems to stop Slack from starting at the moment so disabled.
     # - name: Configure persistent storage
