@@ -4,16 +4,14 @@
   gather_facts: no
   tasks:
     - name: Install dependant packages
-      vars:
-        packages:
+      package:
+        name: 
           - gconf2
           - gconf-service
           - python
           - gvfs-bin
           - libgtk2.0-0
           - xdg-utils
-      package:
-        name: "{{packages}}"
 
     - name: Install GitKraken
       block:

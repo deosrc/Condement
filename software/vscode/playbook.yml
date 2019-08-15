@@ -4,13 +4,11 @@
   gather_facts: no
   tasks:
     - name: Install dependant packages
-      vars:
-        packages:
+      package:
+        name:
           - libxss1
           - libnss3
           - libsecret-1-0
-      package:
-        name: "{{packages}}"
 
     - name: Install Visual Studio Code
       block:
