@@ -1,6 +1,7 @@
 - hosts: all
   become: yes
   become_user: root
+  gather_facts: no
   tasks:
     - name: Install dependant packages
       vars:
@@ -12,8 +13,15 @@
         name: "{{packages}}"
 
     - name: Install Visual Studio Code
-      apt:
-        deb: https://update.code.visualstudio.com/latest/linux-deb-x64/stable
+      block:
+        - name: Check if package is already installed
+          shell: dpkg --list | grep -E "^ii +code"
+          ignore_errors: yes
+          register: code_is_installed
+        - name: Download and install Visual Studio Code if not present
+          when: "code_is_installed.rc == 1"
+          apt:
+            deb: https://update.code.visualstudio.com/latest/linux-deb-x64/stable
 
     - name: Configure persistent storage
       block:
