@@ -1,0 +1,12 @@
+- hosts: all
+  become: yes
+  become_user: root
+  gather_facts: no
+  vars:
+    terraform_version: '0.12.6'
+  tasks:
+    - name: Install Terraform
+      unarchive:
+        src: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+        dest: /usr/local/bin
+        remote_src: yes

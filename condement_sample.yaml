@@ -58,6 +58,7 @@ software: [
   # 'powershell',
   # 'slack',
   # 'thunderbird',
+  # 'terraform',
   ]
 
 # A list of the folders to map between the host and Virtual Machine.
