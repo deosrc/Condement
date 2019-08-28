@@ -11,7 +11,6 @@ The environment can be configured with a simple yaml file but as default you sho
 * Ubuntu 18.04 (LTS) with various desktop options:
   * [Xubuntu](https://xubuntu.org/)
   * [Lubuntu](http://lubuntu.me/)
-  * [Ubuntu Budgie](https://ubuntubudgie.org/)
 * A 'dev' user with sudo (password: 'condement')
 * Files persisted to your host machine
 * Container Hosting
