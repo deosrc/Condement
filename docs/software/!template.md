@@ -3,7 +3,13 @@
 <!--
 Fill in the summary table for the software.
 
-The {software-id} should be a unqiue string to identify the software package
+The {software-version} should be the version identifier of the software package
+which is installed. Where possible, the latest stable version number should be
+hard coded to ensure consistency across environments. If this is not possible,
+you can use the latest available stable version. If this is the case, use "latest"
+instead of the version number in the documentation table.
+
+The {software-id} should be a unique string to identify the software package
 within Condement. This is used in a number of places such as the Ansible folder
 name and persistent storage folder name.
 
@@ -30,6 +36,7 @@ must be specified first in the software list.
 
 |                             |                                |
 | --------------------------- | ------------------------------ |
+| Version                     | {software-version}             |
 | Condement Software ID       | {software-id}                  |
 | Website                     | {software-website}             |
 | License                     | {link-to-license}              |
