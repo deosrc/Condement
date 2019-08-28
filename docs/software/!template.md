@@ -55,8 +55,8 @@ This can usually be retrieved from the website for the software.
 
 <!--
 Include any special notes about the install. For example, the golang software
-package also installs a number of go pakcages which are used by the VSCode
-golang extensionin order to reduce the time to configure the machine.
+package also installs a number of go packages which are used by the VSCode
+golang extension order to reduce the time to configure the machine.
 -->
 
 ### Service Ports
