@@ -3,7 +3,7 @@
 |                             |                                                                                    |
 | --------------------------- | ---------------------------------------------------------------------------------- |
 | Condement Software ID       | `azure-cli`                                                                        |
-| Website                     | [docs.microsoft.com/en-us/cli/azure/](https://docs.microsoft.com/en-us/cli/azure/) |
+| Website                     | [docs.microsoft.com/cli/azure/](https://docs.microsoft.com/cli/azure/) |
 | License                     | [MIT License](https://github.com/Azure/azure-cli/blob/dev/LICENSE)                 |
 | Maintainer                  | [Deosrc](https://github.com/deosrc)                                                |
 | Persistent Storage          | Yes                                                                                |
