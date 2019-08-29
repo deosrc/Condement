@@ -10,4 +10,4 @@
       with_items:
         - "{{ software }}"
       include_role:
-        name: "sotware-{{ item }}"
+        name: "software-{{ item }}"
