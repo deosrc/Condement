@@ -16,12 +16,12 @@ mkdir -p /vagrant/.condement/roles/condement-base
 cp -r /vagrant/system_base/ansible_base/* /vagrant/.condement/roles/condement-base
 
 for d in /vagrant/desktop/*/; do
-    id=${d:8:-1}
+    id=${d:17:-1}
     configure_role "desktop" $id
 done
 
 for s in /vagrant/software/*/; do
-    id=${s:9:-1}
+    id=${s:18:-1}
     configure_role "software" $id
 done
 
