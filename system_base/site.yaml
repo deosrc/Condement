@@ -9,5 +9,7 @@
     - name: Install software
       with_items:
         - "{{ software }}"
+      loop_control:
+        loop_var: software_item
       include_role:
-        name: "software-{{ item }}"
+        name: "software-{{ software_item }}"
