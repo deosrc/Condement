@@ -1,8 +1,7 @@
-- hosts: all
-  gather_facts: no
+- name: Install PowerShell
   become: yes
   become_user: root
-  tasks:
+  block:
     - name: Install Microsoft GPG key
       apt:
         deb: https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb

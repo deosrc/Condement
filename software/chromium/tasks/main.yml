@@ -1,8 +1,7 @@
-- hosts: all
+- name: Install Chromium
   become: yes
   become_user: root
-  gather_facts: no
-  tasks:
+  block:
     - name: Install Chromium Browser
       package:
         name: chromium-browser

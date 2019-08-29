@@ -1,7 +1,7 @@
-- hosts: all
+- name: Install Azure CLI
   become: yes
   become_user: root
-  tasks:
+  block:
     - name: Add microsoft apt key
       apt_key:
         url: https://packages.microsoft.com/keys/microsoft.asc

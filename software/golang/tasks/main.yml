@@ -1,8 +1,7 @@
-- hosts: all
+- name: Install Golang
   become: yes
   become_user: root
-  gather_facts: no
-  tasks:
+  block:
     - name: Download golang
       get_url:
         dest: /home/vagrant/golang.tar.gz

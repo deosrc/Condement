@@ -1,0 +1,25 @@
+- name: Install Thunderbird
+  become: yes
+  become_user: root
+  block:
+    - name: Install Thunderbird
+      package:
+        name: thunderbird
+
+    - name: Configure persistent storage
+      block:
+        - name: Create persistent storage directories
+          with_items:
+            - thunderbird
+            - thunderbird/user_home
+          file:
+            path: "/mnt/persistent_storage/{{item}}"
+            state: directory
+            owner: dev
+            group: dev
+
+        - name: Map user home config directory to persistent storage
+          file:
+            dest: /home/dev/.thunderbird
+            src: /mnt/persistent_storage/thunderbird/user_home
+            state: link

@@ -1,8 +1,7 @@
-- hosts: all
+- name: Install K3s
   become: yes
   become_user: root
-  gather_facts: no
-  tasks:
+  block:
     - name: Download k3s install script
       get_url:
         dest: /home/vagrant/k3s-install.sh

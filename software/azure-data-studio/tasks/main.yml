@@ -1,10 +1,9 @@
-- hosts: all
+- name: Install Azure Data Studio
   become: yes
   become_user: root
-  gather_facts: no
   vars:
     azuredatastudio_version: '1.6.0'
-  tasks:
+  block:
     - name: Install Azure Data Studio
       apt:
         deb: "https://azuredatastudiobuilds.blob.core.windows.net/releases/{{azuredatastudio_version}}/azuredatastudio-linux-{{azuredatastudio_version}}.deb"

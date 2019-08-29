@@ -1,8 +1,7 @@
-- hosts: all
+- name: Install Slack
   become: yes
   become_user: root
-  gather_facts: no
-  tasks:
+  block:
     - name: Install Slack
       block:
         - name: Check if package is already installed
