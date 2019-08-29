@@ -132,3 +132,5 @@ $RECYCLE.BIN/
 *.lnk
 
 # End of https://www.gitignore.io/api/git,macos,linux,puppet,windows,vagrant,visualstudiocode
+
+.condement/

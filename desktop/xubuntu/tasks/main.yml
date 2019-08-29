@@ -1,8 +1,7 @@
-- hosts: all
+- name: Install Xubuntu Desktop
   become: yes
   become_user: root
-  gather_facts: no
-  tasks:
+  block:
     - name: Install Xubuntu desktop
       apt:
         name: xubuntu-desktop

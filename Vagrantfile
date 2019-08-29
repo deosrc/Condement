@@ -87,10 +87,14 @@ Vagrant.configure(2) do |config|
         config.vm.provision "shell", inline: "sudo chmod 777 /etc/default/keyboard" # Change permissions so that file copy works
         config.vm.provision 'file', source: "./keyboard_layouts/" + condement_config['os']['keyboard_layout'], destination: '/etc/default/keyboard', run: "always"
 
-        # Run system base
+        # Build the Ansible payload
+        config.vm.provision 'shell', path: './system_base/build_ansible_payload.sh', run: 'always'
+
+        # Run Ansible
         config.vm.provision 'ansible_local', run: "always" do |ansible|
-            ansible.playbook = "./system_base/ansible_base/playbook.yml"
-            ansible.config_file = "./system_base/ansible.cfg"
+            ansible.playbook = './.condement/site.yaml'
+            ansible.config_file = './system_base/ansible.cfg'
+            ansible.extra_vars = './condement.yaml'
         end
 
         # Configure each host_folder share in it's mount point
@@ -103,23 +107,6 @@ Vagrant.configure(2) do |config|
             end
         end
         config.vm.provision "shell", inline: "mount -a"
-
-        # Install the desktop
-        if (condement_config['os']['desktop'] && condement_config['os']['desktop'] != 'none') then
-            config.vm.provision 'ansible_local', run: "always" do |ansible|
-                ansible.playbook = './desktops/' + condement_config['os']['desktop'] + '/playbook.yml'
-                ansible.config_file = "./system_base/ansible.cfg"
-            end
-        end
-
-        # Run the software configuration files identified for install
-        software_list = condement_config['software']
-        software_list.each do |software_id|
-            config.vm.provision 'ansible_local', run: "always" do |ansible|
-                ansible.playbook = './software/' + software_id + '/playbook.yml'
-                ansible.config_file = "./system_base/ansible.cfg"
-            end
-        end
 
         # Start the desktop
         config.vm.provision "shell", inline: "reboot"
