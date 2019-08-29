@@ -9,7 +9,7 @@ function configure_role {
     cp -r /vagrant/$type/$id/* /vagrant/.condement/roles/$type-$id
 }
 
-rm -r .condement
+rm -r /vagrant/.condement
 
 echo "Configuring Ansible role for Condement base..."
 mkdir -p /vagrant/.condement/roles/condement-base
