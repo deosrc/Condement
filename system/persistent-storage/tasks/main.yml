@@ -1,0 +1,27 @@
+- name: Create software persistent storage directory
+  become: yes
+  become_user: root
+  file:
+    path: "/mnt/persistent_storage/{{ software_item }}"
+    state: directory
+    owner: dev
+    group: dev
+
+- name: Create persistent storage directory folder
+  become: yes
+  become_user: root
+  file:
+    path: "/mnt/persistent_storage/{{ software_item }}/{{ persistent_storage.folder_id }}"
+    state: directory
+    owner: dev
+    group: dev
+
+- name: Map directory to persistent storage
+  become: yes
+  become_user: root
+  file:
+    dest: "{{ persistent_storage.location }}"
+    src: "/mnt/persistent_storage/{{ software_item }}/{{ persistent_storage.folder_id }}"
+    state: link
+    owner: dev
+    group: dev
