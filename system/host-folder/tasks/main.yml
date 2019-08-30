@@ -1,0 +1,17 @@
+- name: "Create host folder mount {{ host_folder.key }}"
+  become: yes
+  become_user: root
+  block:
+    - name: Create empty mount directory
+      file:
+        state: directory
+        path: "{{ host_folder.value.target }}"
+        owner: dev
+        group: dev
+        mode: u=rwx,g=rx,o=
+
+    - name: Create entry in fstab
+      lineinfile:
+        path: /etc/fstab
+        regexp: "^{{ host_folder.key }}    "
+        line: "{{ host_folder.key }}    {{ host_folder.value.target }}    vboxsf    defaults,umask=027,uid=1002,gid=1002    0    0"

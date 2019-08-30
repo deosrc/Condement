@@ -40,3 +40,11 @@
       copy:
         dest: "/var/lib/AccountsService/users/{{ item }}"
         src: accounts_service_hidden_user
+
+- name: Create host folder mounts
+  with_dict:
+    - "{{ host_folders }}"
+  loop_control:
+    loop_var: host_folder
+  include_role:
+    name: host-folder

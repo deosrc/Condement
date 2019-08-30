@@ -97,17 +97,6 @@ Vagrant.configure(2) do |config|
             ansible.extra_vars = './condement.yaml'
         end
 
-        # Configure each host_folder share in its mount point
-        if (condement_config['host_folders'] != nil) then
-            condement_config['host_folders'].each do |folder_name, folder|
-                config.vm.provision "shell" do |s|
-                    s.path = './system_base/add_host_folder.sh'
-                    s.args = [ folder_name, folder['target'] ]
-                end
-            end
-        end
-        config.vm.provision "shell", inline: "mount -a"
-
         # Start the desktop
         config.vm.provision "shell", inline: "reboot"
     end
