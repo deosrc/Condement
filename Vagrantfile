@@ -88,16 +88,16 @@ Vagrant.configure(2) do |config|
         config.vm.provision 'file', source: "./keyboard_layouts/" + condement_config['os']['keyboard_layout'], destination: '/etc/default/keyboard', run: "always"
 
         # Build the Ansible payload
-        config.vm.provision 'shell', path: './system_base/build_ansible_payload.sh', run: 'always'
+        config.vm.provision 'shell', path: './system/build_ansible_payload.sh', run: 'always'
 
         # Run Ansible
         config.vm.provision 'ansible_local', run: "always" do |ansible|
             ansible.playbook = './.condement/site.yaml'
-            ansible.config_file = './system_base/ansible.cfg'
+            ansible.config_file = './system/ansible.cfg'
             ansible.extra_vars = './condement.yaml'
         end
 
-        # Configure each host_folder share in it's mount point
+        # Configure each host_folder share in its mount point
         if (condement_config['host_folders'] != nil) then
             condement_config['host_folders'].each do |folder_name, folder|
                 config.vm.provision "shell" do |s|
