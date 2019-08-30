@@ -1,0 +1,4 @@
+- name: Mount all volumes
+  become: yes
+  become_user: root
+  shell: mount -a

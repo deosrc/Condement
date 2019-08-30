@@ -15,3 +15,5 @@
         path: /etc/fstab
         regexp: "^{{ host_folder.key }}    "
         line: "{{ host_folder.key }}    {{ host_folder.value.target }}    vboxsf    defaults,umask=027,uid=1002,gid=1002    0    0"
+      notify:
+        - Mount all volumes
