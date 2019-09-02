@@ -3,8 +3,8 @@
 *.log
 
 # Exclude the configuration file
-condement.yaml
-condement.*.yaml
+/condement.yaml
+/condement.*.yaml
 
 # Created by https://www.gitignore.io/api/git,macos,linux,puppet,windows,vagrant,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=git,macos,linux,puppet,windows,vagrant,visualstudiocode
