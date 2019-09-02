@@ -6,7 +6,7 @@ if (!File.file?('./condement.yaml')) then
 end
 condement_config = YAML.load_file('./condement.yaml')
 
-this_condement_version = 0.3
+this_condement_version = 0.4
 
 if (condement_config['condement_version'] == nil) then
     raise 'condement_version must be specified'
@@ -78,10 +78,6 @@ Vagrant.configure(2) do |config|
                 config.vm.network 'forwarded_port', guest: port_forward['vm_port'], host: port_forward['host_port'], protocol: port_forward['protocol']
             end
         end
-
-        # Update the system
-        config.vm.provision "shell", inline: "apt update"
-        config.vm.provision "shell", inline: "DEBIAN_FRONTEND=noninteractive apt upgrade -y"
 
         # Set the keyboard language
         config.vm.provision "shell", inline: "sudo chmod 777 /etc/default/keyboard" # Change permissions so that file copy works

@@ -2,6 +2,12 @@
   become: yes
   become_user: root
   block:
+    - name: Update the OS and existing packages
+      when: os.update_packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+
     - name: Create dev user
       include_tasks: create_dev_user.yml
 
