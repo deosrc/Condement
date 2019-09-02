@@ -18,6 +18,10 @@ for r in /vagrant/system/*/; do
     cp -r /vagrant/system/$id/* /vagrant/.condement/roles/$id
 done
 
+echo "Copying keyboard layout files..."
+mkdir -p /vagrant/.condement/roles/condement-base/files/keyboard_layouts/
+cp /vagrant/keyboard_layouts/* /vagrant/.condement/roles/condement-base/files/keyboard_layouts/
+
 for r in /vagrant/desktop/*/; do
     id=${r:17:-1}
     configure_role "desktop" $id

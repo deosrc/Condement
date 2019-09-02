@@ -79,10 +79,6 @@ Vagrant.configure(2) do |config|
             end
         end
 
-        # Set the keyboard language
-        config.vm.provision "shell", inline: "sudo chmod 777 /etc/default/keyboard" # Change permissions so that file copy works
-        config.vm.provision 'file', source: "./keyboard_layouts/" + condement_config['os']['keyboard_layout'], destination: '/etc/default/keyboard', run: "always"
-
         # Build the Ansible payload
         config.vm.provision 'shell', path: './system/build_ansible_payload.sh', run: 'always'
 

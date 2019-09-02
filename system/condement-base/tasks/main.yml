@@ -47,6 +47,14 @@
         dest: "/var/lib/AccountsService/users/{{ item }}"
         src: accounts_service_hidden_user
 
+    - name: Configure Keyboard
+      copy:
+        src: "./keyboard_layouts/{{ os.keyboard_layout }}"
+        dest: /etc/default/keyboard
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+
 - name: Create host folder mounts
   with_dict:
     - "{{ host_folders }}"
