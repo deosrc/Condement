@@ -56,8 +56,7 @@
         mode: u=rwx,g=rx,o=rx
 
 - name: Create host folder mounts
-  with_dict:
-    - "{{ host_folders }}"
+  loop: "{{ [] if host_folders is none else (host_folders | dict2items) }}"
   loop_control:
     loop_var: host_folder
   include_role:
