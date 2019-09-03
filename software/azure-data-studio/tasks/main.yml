@@ -1,0 +1,24 @@
+- name: Install Azure Data Studio
+  become: yes
+  become_user: root
+  vars:
+    azuredatastudio_version: '1.6.0'
+  block:
+    - name: Check if package is already installed
+      shell: dpkg --list | grep -E "^ii +azuredatastudio"
+      ignore_errors: yes
+      register: is_azure_data_studio_installed
+
+    - name: Install package
+      when: "is_azure_data_studio_installed.rc == 1"
+      apt:
+        deb: "https://azuredatastudiobuilds.blob.core.windows.net/releases/{{azuredatastudio_version}}/azuredatastudio-linux-{{azuredatastudio_version}}.deb"
+
+- name: Configure persistent storage
+  with_items:
+    - { folder_id: user_home, location: '/home/dev/.azuredatastudio' }
+    - { folder_id: user_config, location: '/home/dev/.config/azuredatastudio' }
+  loop_control:
+    loop_var: persistent_storage
+  include_role:
+    name: persistent-storage

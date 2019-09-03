@@ -1,0 +1,22 @@
+condement_version: 0.4
+
+show_gui: true
+
+resource:
+  cpus: 2
+  memory_mb: 2048
+  video_memory_mb: 128
+  video_3d_acceleration: true
+  monitor_count: 2
+os:
+  hostname: "condement-testing-level-1"
+  keyboard_layout: "en_gb"
+  desktop: "<desktop>"
+  update_packages: false
+
+software: [
+  #'...'
+  ]
+
+host_folders:
+forwarded_ports:

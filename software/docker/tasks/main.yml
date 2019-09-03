@@ -1,0 +1,35 @@
+- name: Install Docker
+  become: yes
+  become_user: root
+  block:
+    - name: Add docker apt key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        keyring: /etc/apt/trusted.gpg.d/docker.gpg
+        id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+
+    - name: Add docker apt repository
+      apt_repository:
+        repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu {{ansible_distribution_release}} stable
+
+    - name: Install docker
+      package:
+        name:
+          - docker-ce-cli
+          - containerd.io
+          - docker-ce
+          - docker-compose
+
+    - name: Add docker group to dev user
+      user:
+        name: dev
+        append: yes
+        groups: docker
+
+- name: Configure persistent storage
+  with_items:
+    - { folder_id: user_home, location: '/home/dev/.docker' }
+  loop_control:
+    loop_var: persistent_storage
+  include_role:
+    name: persistent-storage

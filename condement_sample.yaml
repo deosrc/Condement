@@ -2,7 +2,7 @@
 # Condement Sample Config File #
 ################################
 
-condement_version: 0.2
+condement_version: 0.4
 
 # Determines if VirtualBox should show the Virtual Machine display once it is created.
 show_gui: true
@@ -39,8 +39,8 @@ os:
   # See the "desktops" folder.
   desktop: "xubuntu"
 
-# Determines if packages should be updated when provisioning
-update_packages: true
+  # Determines if packages should be updated when provisioning
+  update_packages: true
 
 # The software to install to the Virtual Machine.
 # Each entry must match with a puppet file in the "software" folder.

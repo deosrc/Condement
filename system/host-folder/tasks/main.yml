@@ -1,0 +1,19 @@
+- name: "Create host folder mount {{ host_folder.key }}"
+  become: yes
+  become_user: root
+  block:
+    - name: "Create target directory '{{ host_folder.value.target }}'"
+      file:
+        state: directory
+        path: "{{ host_folder.value.target }}"
+        owner: dev
+        group: dev
+        mode: u=rwx,g=rx,o=
+
+    - name: "Create entry in fstab for host folder '{{ host_folder.key }}'"
+      mount:
+        path: "{{ host_folder.value.target }}"
+        src: "{{ host_folder.key }}"
+        fstype: vboxsf
+        opts: defaults,umask=027,uid=1002,gid=1002
+        state: mounted

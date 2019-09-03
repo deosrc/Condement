@@ -1,0 +1,63 @@
+- name: Install Condement base
+  become: yes
+  become_user: root
+  block:
+    - name: Update the OS and existing packages
+      when: os.update_packages
+      apt:
+        upgrade: yes
+        update_cache: yes
+
+    - name: Create dev user
+      include_tasks: create_dev_user.yml
+
+    - name: Create persistent storage directory
+      file:
+        path: /mnt/persistent_storage
+        state: directory
+        owner: dev
+        group: dev
+
+    - name: Install VirtualBox Guest Additions
+      vars:
+        packages:
+          - virtualbox-guest-dkms
+          - virtualbox-guest-utils
+          - virtualbox-guest-x11
+      package:
+        name: "{{packages}}"
+
+    - name: Install packages useful to software provisioners
+      vars:
+        packages:
+          - curl
+      package:
+        name: "{{packages}}"
+
+    - name: Ensure account service folders exist
+      file:
+        state: directory
+        path: /var/lib/AccountsService/users
+
+    - name: Hide vagrant and image system users
+      with_items:
+        - vagrant
+        - ubuntu
+      copy:
+        dest: "/var/lib/AccountsService/users/{{ item }}"
+        src: accounts_service_hidden_user
+
+    - name: Configure Keyboard
+      copy:
+        src: "./keyboard_layouts/{{ os.keyboard_layout }}"
+        dest: /etc/default/keyboard
+        owner: root
+        group: root
+        mode: u=rwx,g=rx,o=rx
+
+- name: Create host folder mounts
+  loop: "{{ [] if host_folders is none else (host_folders | dict2items) }}"
+  loop_control:
+    loop_var: host_folder
+  include_role:
+    name: host-folder
