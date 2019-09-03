@@ -6,7 +6,7 @@ if (!File.file?('./condement.yaml')) then
 end
 condement_config = YAML.load_file('./condement.yaml')
 
-this_condement_version = 0.3
+this_condement_version = 0.4
 
 if (condement_config['condement_version'] == nil) then
     raise 'condement_version must be specified'
@@ -79,46 +79,14 @@ Vagrant.configure(2) do |config|
             end
         end
 
-        # Update the system
-        config.vm.provision "shell", inline: "apt update"
-        config.vm.provision "shell", inline: "DEBIAN_FRONTEND=noninteractive apt upgrade -y"
+        # Build the Ansible payload
+        config.vm.provision 'shell', path: './system/build_ansible_payload.sh', run: 'always'
 
-        # Set the keyboard language
-        config.vm.provision "shell", inline: "sudo chmod 777 /etc/default/keyboard" # Change permissions so that file copy works
-        config.vm.provision 'file', source: "./keyboard_layouts/" + condement_config['os']['keyboard_layout'], destination: '/etc/default/keyboard', run: "always"
-
-        # Run system base
+        # Run Ansible
         config.vm.provision 'ansible_local', run: "always" do |ansible|
-            ansible.playbook = "./system_base/ansible_base/playbook.yml"
-            ansible.config_file = "./system_base/ansible.cfg"
-        end
-
-        # Configure each host_folder share in it's mount point
-        if (condement_config['host_folders'] != nil) then
-            condement_config['host_folders'].each do |folder_name, folder|
-                config.vm.provision "shell" do |s|
-                    s.path = './system_base/add_host_folder.sh'
-                    s.args = [ folder_name, folder['target'] ]
-                end
-            end
-        end
-        config.vm.provision "shell", inline: "mount -a"
-
-        # Install the desktop
-        if (condement_config['os']['desktop'] && condement_config['os']['desktop'] != 'none') then
-            config.vm.provision 'ansible_local', run: "always" do |ansible|
-                ansible.playbook = './desktops/' + condement_config['os']['desktop'] + '/playbook.yml'
-                ansible.config_file = "./system_base/ansible.cfg"
-            end
-        end
-
-        # Run the software configuration files identified for install
-        software_list = condement_config['software']
-        software_list.each do |software_id|
-            config.vm.provision 'ansible_local', run: "always" do |ansible|
-                ansible.playbook = './software/' + software_id + '/playbook.yml'
-                ansible.config_file = "./system_base/ansible.cfg"
-            end
+            ansible.playbook = './.condement/site.yaml'
+            ansible.config_file = './system/ansible.cfg'
+            ansible.extra_vars = './condement.yaml'
         end
 
         # Start the desktop

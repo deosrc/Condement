@@ -1,0 +1,31 @@
+- name: Deploy kubernetes dashboard
+  block:
+    - name: Copy dashboard deployment yml
+      copy:
+        dest: /home/vagrant/kubernetes-dashboard.yml
+        src: kubernetes-dashboard.yml
+    - name: Deploy yaml file
+      shell: kubectl apply -f /home/vagrant/kubernetes-dashboard.yml
+
+- name: Create desktop shortcut
+  become: yes
+  become_user: root
+  block:
+    - name: Copy logo
+      copy:
+        dest: /etc/kubernetes_logo.png
+        src: logo.png
+    - name: Copy desktop link
+      copy:
+        dest: '/home/dev/Desktop/Kubernetes Dashboard.desktop'
+        src: 'Kubernetes Dashboard.desktop'
+        owner: dev
+        group: dev
+        mode: +x
+
+- name: Add dashboard address to hosts file
+  become: yes
+  become_user: root
+  lineinfile:
+    path: /etc/hosts
+    line: '127.0.0.1     k8s.localtest.me'

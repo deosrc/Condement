@@ -1,0 +1,55 @@
+- name: Install Golang
+  become: yes
+  become_user: root
+  block:
+    - name: Download golang
+      get_url:
+        dest: /home/vagrant/golang.tar.gz
+        url: https://dl.google.com/go/go1.12.2.linux-amd64.tar.gz
+
+    - name: Install golang
+      unarchive:
+        dest: /usr/local
+        src: /home/vagrant/golang.tar.gz
+
+    - name: Add go to path
+      lineinfile:
+        path: /home/dev/.profile
+        line: 'export PATH=$PATH:/usr/local/go/bin'
+
+    - name: Create go directory for dev user
+      file:
+        path: /home/dev/go
+        state: directory
+        owner: dev
+        group: dev
+
+    - name: Install go packages used by VSCode
+      become: yes
+      become_user: dev
+      with_items:
+        - github.com/ramya-rao-a/go-outline
+        - github.com/acroca/go-symbols
+        - github.com/mdempsky/gocode
+        - github.com/rogpeppe/godef
+        - golang.org/x/tools/cmd/godoc
+        - github.com/zmb3/gogetdoc
+        - golang.org/x/lint/golint
+        - github.com/fatih/gomodifytags
+        - golang.org/x/tools/cmd/gorename
+        - sourcegraph.com/sqs/goreturns
+        - golang.org/x/tools/cmd/goimports
+        - github.com/cweill/gotests/...
+        - golang.org/x/tools/cmd/guru
+        - github.com/josharian/impl
+        - github.com/haya14busa/goplay/cmd/goplay
+        - github.com/uudashr/gopkgs/cmd/gopkgs
+        - github.com/davidrjenni/reftools/cmd/fillstruct
+        - github.com/alecthomas/gometalinter
+        - github.com/go-delve/delve/cmd/dlv
+      shell: |
+        GOPATH=/home/dev/go
+        GOCACHE=/home/dev/.cache/go-build
+        /usr/local/go/bin/go get -v {{item}}
+
+# TODO: Persist $GOPATH/bin (and vendor/? )
