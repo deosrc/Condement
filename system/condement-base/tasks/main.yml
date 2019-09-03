@@ -61,6 +61,3 @@
     loop_var: host_folder
   include_role:
     name: host-folder
-
-- name: Run handlers to mount host folders
-  meta: flush_handlers

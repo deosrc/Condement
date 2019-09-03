@@ -11,9 +11,9 @@
         mode: u=rwx,g=rx,o=
 
     - name: Create entry in fstab
-      lineinfile:
-        path: /etc/fstab
-        regexp: "^{{ host_folder.key }}    "
-        line: "{{ host_folder.key }}    {{ host_folder.value.target }}    vboxsf    defaults,umask=027,uid=1002,gid=1002    0    0"
-      notify:
-        - Mount all volumes
+      mount:
+        path: "{{ host_folder.value.target }}"
+        src: "{{ host_folder.key }}"
+        fstype: vboxsf
+        opts: defaults,umask=027,uid=1002,gid=1002
+        state: mounted
