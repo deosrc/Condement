@@ -24,6 +24,14 @@ The name of the desktop environment to install.
 
 See the [desktops](../../desktops) directory of the repository for available options.
 
+### `update_packages`
+
+Determines if the installed packages should be updated as part of the VM build.
+
+Depending on how old your base image is, having this enabled may add significant runtime to the build, however,
+disabling it may pose security issues. If the build is taking a long time due to this stage, see
+[Updating the base image](../using-the-vm#updating-the-base-image).
+
 ## Example
 
 ```yaml

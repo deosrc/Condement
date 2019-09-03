@@ -65,3 +65,19 @@ build.
 
    Once restarted, the software will be installed. You can usually login and continuing using the VM while the software
    is being installed.
+
+# Updating the base image
+
+When building the VM, vagrant may show the following warning:
+
+```stdout
+==> condement-testing-level-1: Checking if box 'ubuntu/bionic64' version '20190902.0.0' is up to date...
+==> condement-testing-level-1: A newer version of the box 'ubuntu/bionic64' for provider 'virtualbox' is
+==> condement-testing-level-1: available! You currently have version '20190902.0.0'. The latest is version
+==> condement-testing-level-1: '20190903.0.0'. Run `vagrant box update` to update.
+```
+
+Updating the base image (or box) will ensure you have the latest patches and reduce the build time if you have the
+[update_packages setting](./configuration/os#update_packages) turned on.
+
+To update the base image, run `vagrant box update`. You can also run `vagrant box prune` to remove any old versions.
