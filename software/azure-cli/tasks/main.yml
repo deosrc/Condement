@@ -16,21 +16,10 @@
       package:
         name: azure-cli
 
-    - name: Configure persistent storage
-      block:
-        - name: Create persistent storage directories
-          with_items:
-            - azure-cli
-            - azure-cli/user_home
-          file:
-            path: "/mnt/persistent_storage/{{item}}"
-            state: directory
-            owner: dev
-            group: dev
-
-        # Persist ~/.azure directory (has credentials for azure subscriptions)
-        - name: Map user home config directory to persistent storage
-          file:
-            dest: /home/dev/.azure
-            src: /mnt/persistent_storage/azure-cli/user_home
-            state: link
+- name: Configure persistent storage
+  with_items:
+    - { folder_id: user_home, location: '/home/dev/.azure' }
+  loop_control:
+    loop_var: persistent_storage
+  include_role:
+    name: persistent-storage

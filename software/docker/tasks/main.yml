@@ -26,21 +26,10 @@
         append: yes
         groups: docker
 
-    - name: Configure persistent storage
-      block:
-        - name: Create persistent storage directories
-          with_items:
-            - docker
-            - docker/user_home
-          file:
-            path: "/mnt/persistent_storage/{{item}}"
-            state: directory
-            owner: dev
-            group: dev
-
-        # Persist ~/.docker/config.json (has credentials for registries)
-        - name: Map user home config directory to persistent storage
-          file:
-            dest: /home/dev/.docker
-            src: /mnt/persistent_storage/docker/user_home
-            state: link
+- name: Configure persistent storage
+  with_items:
+    - { folder_id: user_home, location: '/home/dev/.docker' }
+  loop_control:
+    loop_var: persistent_storage
+  include_role:
+    name: persistent-storage

@@ -23,17 +23,10 @@
           apt:
             deb: "https://release.gitkraken.com/linux/gitkraken-amd64.deb"
 
-    - name: Configure persistent storage
-      block:
-        - name: Create persistent storage directory for GitKraken
-          file:
-            path: "/mnt/persistent_storage/gitkraken"
-            state: directory
-            owner: dev
-            group: dev
-
-        - name: Map user home config directory to persistent storage
-          file:
-            dest: /home/dev/.gitkraken
-            src: /mnt/persistent_storage/gitkraken
-            state: link
+- name: Configure persistent storage
+  with_items:
+    - { folder_id: user_home, location: '/home/dev/.gitkraken' }
+  loop_control:
+    loop_var: persistent_storage
+  include_role:
+    name: persistent-storage
