@@ -15,20 +15,21 @@ os:
   update_packages: false
 
 software: [
-  'vscode',
+  'azure-cli',
   'azure-data-studio',
+  'chromium',
   'docker',
+  'firefox',
+  'gitkraken',
+  'golang',
   'k3s',
   'kubernetes-dashboard',
-  'firefox',
-  'chromium',
-  'golang',
-  'gitkraken',
-  'azure-cli',
   'powershell',
   'slack',
+  'terraform',
   'thunderbird',
-  '...',
+  'vscode',
+  #'...',
   ]
 
 host_folders:

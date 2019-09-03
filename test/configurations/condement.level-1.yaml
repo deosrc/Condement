@@ -15,7 +15,7 @@ os:
   update_packages: false
 
 software: [
-  '...'
+  #'...'
   ]
 
 host_folders:

@@ -15,11 +15,11 @@ os:
   update_packages: false
 
 software: [
-  'vscode',
   'docker',
   'k3s',
   'kubernetes-dashboard',
-  '...',
+  'vscode',
+  #'...',
   ]
 
 host_folders:
