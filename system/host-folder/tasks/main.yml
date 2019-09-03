@@ -2,7 +2,7 @@
   become: yes
   become_user: root
   block:
-    - name: Create empty mount directory
+    - name: "Create target directory '{{ host_folder.value.target }}'"
       file:
         state: directory
         path: "{{ host_folder.value.target }}"
@@ -10,7 +10,7 @@
         group: dev
         mode: u=rwx,g=rx,o=
 
-    - name: Create entry in fstab
+    - name: "Create entry in fstab for host folder '{{ host_folder.key }}'"
       mount:
         path: "{{ host_folder.value.target }}"
         src: "{{ host_folder.key }}"

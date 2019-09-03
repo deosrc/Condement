@@ -1,4 +1,4 @@
-- name: Create software persistent storage directory
+- name: "Create root persistent storage directory for {{ software_item }}"
   become: yes
   become_user: root
   file:
@@ -7,7 +7,7 @@
     owner: dev
     group: dev
 
-- name: Create persistent storage directory folder
+- name: "Create persistent storage directory '{{ persistent_storage.folder_id }}' for {{ software_item }}"
   become: yes
   become_user: root
   file:
@@ -16,7 +16,7 @@
     owner: dev
     group: dev
 
-- name: Map directory to persistent storage
+- name: "Map directory '{{ persistent_storage.location }}' to persistent storage"
   become: yes
   become_user: root
   file:
