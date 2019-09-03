@@ -4,7 +4,7 @@
   block:
     - name: Install dependant packages
       package:
-        name: 
+        name:
           - gconf2
           - gconf-service
           - python
