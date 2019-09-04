@@ -1,0 +1,15 @@
+- hosts: all
+  tasks:
+    - name: Install Condement base
+      import_role:
+        name: condement-base
+    - name: Install desktop
+      import_role:
+        name: "desktop-{{ os.desktop }}"
+    - name: Install software
+      with_items:
+        - "{{ software }}"
+      loop_control:
+        loop_var: software_item
+      include_role:
+        name: "software-{{ software_item }}"

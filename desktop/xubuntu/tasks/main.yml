@@ -1,0 +1,14 @@
+- name: Install Xubuntu Desktop
+  become: yes
+  become_user: root
+  block:
+    - name: Install Xubuntu desktop
+      apt:
+        name: xubuntu-desktop
+        install_recommends: no
+    - name: Install Whisker Menu
+      package:
+        name: xfce4-whiskermenu-plugin
+    - name: Install standard gnome software package
+      package:
+        name: gnome-software

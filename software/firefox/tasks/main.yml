@@ -1,0 +1,22 @@
+- name: Install Firefox
+  become: yes
+  become_user: root
+  block:
+    - name: Install Firefox Browser
+      package:
+        name: firefox
+
+    - name: Ensure the mozilla directory exists
+      file:
+        state: directory
+        path: /home/dev/.mozilla
+        owner: dev
+        group: dev
+
+- name: Configure persistent storage
+  with_items:
+    - { folder_id: user_home, location: '/home/dev/.mozilla/firefox' }
+  loop_control:
+    loop_var: persistent_storage
+  include_role:
+    name: persistent-storage

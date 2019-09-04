@@ -1,0 +1,15 @@
+- name: Install Thunderbird
+  become: yes
+  become_user: root
+  block:
+    - name: Install Thunderbird
+      package:
+        name: thunderbird
+
+- name: Configure persistent storage
+  with_items:
+    - { folder_id: user_home, location: '/home/dev/.thunderbird' }
+  loop_control:
+    loop_var: persistent_storage
+  include_role:
+    name: persistent-storage

@@ -1,8 +1,0 @@
-- hosts: all
-  become: yes
-  become_user: root
-  tasks:
-    - name: Install Lubuntu desktop
-      apt:
-        name: lubuntu-desktop
-        install_recommends: no

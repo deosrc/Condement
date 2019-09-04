@@ -1,0 +1,32 @@
+- name: Install GitKraken
+  become: yes
+  become_user: root
+  block:
+    - name: Install dependant packages
+      package:
+        name:
+          - gconf2
+          - gconf-service
+          - python
+          - gvfs-bin
+          - libgtk2.0-0
+          - xdg-utils
+
+    - name: Install GitKraken
+      block:
+        - name: Check if package is already installed
+          shell: dpkg --list | grep -E "^ii +gitkraken"
+          ignore_errors: yes
+          register: is_gitkraken_installed
+        - name: Download and install GitKraken if not present
+          when: "is_gitkraken_installed.rc == 1"
+          apt:
+            deb: "https://release.gitkraken.com/linux/gitkraken-amd64.deb"
+
+- name: Configure persistent storage
+  with_items:
+    - { folder_id: user_home, location: '/home/dev/.gitkraken' }
+  loop_control:
+    loop_var: persistent_storage
+  include_role:
+    name: persistent-storage

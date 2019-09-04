@@ -1,0 +1,7 @@
+- name: Install Chromium
+  become: yes
+  become_user: root
+  block:
+    - name: Install Chromium Browser
+      package:
+        name: chromium-browser
