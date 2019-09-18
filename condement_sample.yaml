@@ -14,7 +14,7 @@ resource:
 
   # The amount of memory to attach to the Virtual Machine in Megabytes.
   # This should be less than the amount of free memory on your host machine otherwise you will encounter performance issues.
-  memory_mb: 8192
+  memory_mb: 2048
 
   # The amount of video memory to assign to the Virtual Machine in Megabytes.
   # This should be between 1 and 128.
@@ -24,7 +24,7 @@ resource:
   video_3d_acceleration: true
 
   # The number of monitors to set for the VM. Secondary monitor may need enabling in the view menu before being used.
-  monitor_count: 2
+  monitor_count: 1
 
 os:
   # The hostname of the Virtual Machine.
