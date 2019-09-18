@@ -66,7 +66,7 @@ build.
    Once restarted, the software will be installed. You can usually login and continuing using the VM while the software
    is being installed.
 
-# Updating the base image
+## Updating the base image
 
 When building the VM, vagrant may show the following warning:
 
