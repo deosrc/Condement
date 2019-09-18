@@ -26,6 +26,8 @@ The environment can be configured with a simple yaml file but generally consists
     * [Firefox](https://www.mozilla.org/en-US/firefox/new/)
     * [Chromium](https://www.chromium.org/Home)
 
+![condement usage example](./docs/images/usage-example.gif)
+
 ## Further Documentation
 
 * [Getting Started](./docs/getting-started.md)
