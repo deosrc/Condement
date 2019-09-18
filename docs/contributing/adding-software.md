@@ -52,11 +52,11 @@ Once you have selected a software ID, move to the next section.
 
 The testing levels defined below are used to establish the amount of testing before submitting a software package.
 
-| Testing Level      | Desktop | Software Packages   |
-| ------------------ | ------- | ------------------- |
-| Level 1            | All     | Required Only       |
-| Level 2            | Xubuntu | Defaults            |
-| Level 3            | Xubuntu | All non-conflicting |
+| Testing Level | Desktop | Software Packages   |
+| ------------- | ------- | ------------------- |
+| Level 1       | All     | Required Only       |
+| Level 2       | Xubuntu | Defaults            |
+| Level 3       | Xubuntu | All non-conflicting |
 
 #### Level 1
 
@@ -127,52 +127,32 @@ An entry to install your software package must be added in two files:
 Persistent storage can be used to save configuration of the software so that it is preserved between rebuild of the
 machine. An important note here is that this is for "configuration" and not for user files (e.g. documents).
 
-There are two steps to configuring persistent storage in your installer package:
+Configuration of persistent storage has been simplified through the use of the `persistent-storage` Ansible role. This
+accepts two variables:
 
-1. Create a folder for the configurationin the configuration directory:
+| Variable                       | Example            | Description                                                                                    |
+| ------------------------------ | ------------------ | ---------------------------------------------------------------------------------------------- |
+| `persistent_storage.folder_id` | `user_home`        | An ID for the persistent storage folder. This must be unique only within the software package. |
+| `persistent_storage.location`  | `/home/dev/.azure` | The location to mount the folder to within the VM.                                             |
 
-   All of the persistent storage for your software should be stored in `/mnt/persistent_storage/{software-id}/`.
+The role also uses a third variable of `software_item` but this is populated internally by Condement and should not be
+manually configured. Doing so may cause future compatibility issues.
 
-2. Create a link from the configuration directory, to within the persistent storage folder for the software.
-
-   It is recommended to create additional directories within the persistent storage folder for the software rather than
-   using the root folder for forwards compatibility (i.e. if the software vendor decides to add another separate folder
-   for configuration, you can just add a folder rather than having to move an existing one). It is also beneficial to
-   keep to the pattern below for easier debugging.
-
-   | Software Configuration Directory    | Persistent Storage Folder                           |
-   | ----------------------------------- | --------------------------------------------------- |
-   | `/home/dev/.{software-name}`        | `/mnt/persistent_storage/{software-id}/user_home`   |
-   | `/home/dev/.config/{software-name}` | `/mnt/persistent_storage/{software-id}/user_config` |
-
-An example of this process is below:
+Although you may only need to configure one persistent storage folder, it is recommended to use the following "loop"
+pattern to make future additions easier:
 
 ```yaml
 - name: Configure persistent storage
-  block:
-    - name: Create persistent storage directories
-      with_items:
-      - vscode
-      - vscode/user_home
-      - vscode/user_config
-      file:
-        path: "/mnt/persistent_storage/{{item}}"
-        state: directory
-        owner: dev
-        group: dev
-  
-    - name: Map user home config directory to persistent storage
-      file:
-        dest: /home/dev/.vscode
-        src: /mnt/persistent_storage/vscode/user_home
-        state: link
-  
-    - name: Map user config directory to persistent storage
-      file:
-        dest: /home/dev/.config/Code
-        src: /mnt/persistent_storage/vscode/user_config
-        state: link
+  with_items:
+    - { folder_id: user_home, location: '/home/dev/.azure' }
+  loop_control:
+    loop_var: persistent_storage
+  include_role:
+    name: persistent-storage
 ```
+
+The example above from the `azure-cli` software package will map the persistent storage folder
+`/mnt/persistent_storage/azure-cli/user_home` to the `/home/dev/.azure` folder.
 
 ## Submitting the Install Package
 
