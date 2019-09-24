@@ -21,22 +21,3 @@
       file:
         path: /etc/rancher/k3s/k3s.yaml
         mode: u=rw,g=r,o=r
-
-    - name: Create aliases for standard k8s commands
-      vars:
-        accounts:
-          - dev
-          - vagrant
-      block:
-        - name: Create .k3s-aliases file
-          with_items: "{{accounts}}"
-          copy:
-            dest: "/home/{{item}}/.k3s-aliases"
-            src: k3s-aliases
-            owner: "{{item}}"
-            group: "{{item}}"
-        - name: Add import to bash profile
-          with_items: "{{accounts}}"
-          lineinfile:
-            path: "/home/{{item}}/.bashrc"
-            line: 'source ~/.k3s-aliases'
