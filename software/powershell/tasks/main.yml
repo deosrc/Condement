@@ -2,18 +2,9 @@
   become: yes
   become_user: root
   block:
-    - name: Install Microsoft GPG key
-      apt:
-        deb: https://packages.microsoft.com/config/ubuntu/18.04/packages-microsoft-prod.deb
-
-    - name: Enable universe repository
-      apt_repository:
-        repo: "{{ item }}"
-      loop:
-        - "deb http://archive.ubuntu.com/ubuntu/ bionic universe"
-        - "deb http://archive.ubuntu.com/ubuntu/ bionic-updates universe"
-        - "deb http://security.ubuntu.com/ubuntu/ bionic-security universe"
-
+    - name: Install Microsoft package repository
+      include_role:
+        name: software-microsoft-package-repository
     - name: Install PowerShell
       package:
         name: powershell

@@ -7,7 +7,7 @@
 | License                     | [MIT License](https://github.com/PowerShell/PowerShell/blob/master/LICENSE.txt)      |
 | Maintainer                  | [Deosrc](https://github.com/deosrc)                                                  |
 | Persistent Storage          | No                                                                                   |
-| Other Software Dependencies | None                                                                                 |
+| Other Software Dependencies | [Microsoft Package Repository](./microsoft-package-repository)                       |
 
 ## Description
 
@@ -21,9 +21,10 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/PowerShell)
 
 ## Install Notes
 
-Installs the Microsoft GPG key from the official Microsoft package repository.
-
 Installs PowerShell from the Ubuntu "Universe" repository.
+
+The Condement software package for the Microsoft Package Repository is included automatically. There is no need to
+specify it in the configuration file.
 
 ## Limitations
 

@@ -59,6 +59,7 @@ software: [
   # 'slack',
   # 'thunderbird',
   # 'terraform',
+  # 'dotnetcore3-sdk',
   ]
 
 # A list of the folders to map between the host and Virtual Machine.
