@@ -1,0 +1,10 @@
+- name: Install .NET Core 3 SDK
+  become: yes
+  become_user: root
+  block:
+    - name: Install Microsoft package repository
+      include_role:
+        name: software-microsoft-package-repository
+    - name: Install package
+      apt:
+        name: dotnet-sdk-3.0
