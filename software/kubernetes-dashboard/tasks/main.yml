@@ -7,6 +7,15 @@
     - name: Deploy yaml file
       shell: kubectl apply -f /home/vagrant/kubernetes-dashboard.yml
 
+- name: Deploy kubernetes dashboard ingress
+  block:
+    - name: Copy ingress deployment yml
+      copy:
+        dest: /home/vagrant/custom-ingress.yml
+        src: custom-ingress.yml
+    - name: Deploy yaml file
+      shell: kubectl apply -f /home/vagrant/custom-ingress.yml
+
 - name: Create desktop shortcut
   become: yes
   become_user: root
