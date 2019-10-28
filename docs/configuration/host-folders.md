@@ -26,6 +26,11 @@ Source folders can be relative to the home directory of the user building the VM
 The location of the folder within the VM. This should always be an absolute path. To store this in the user's home
 directory, use a subfolder of `/home/dev/`.
 
+### `umask` (Optional)
+
+The umask to apply to the folder mount. This is an optional property which will default to `'027'` if not specified.
+Only octal notation is supported.
+
 ## Persistent Storage
 
 The `persistent_storage` host folder is a special entry. Installed software will map their configuration files to

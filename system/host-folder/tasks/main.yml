@@ -15,5 +15,5 @@
         path: "{{ host_folder.value.target }}"
         src: "{{ host_folder.key }}"
         fstype: vboxsf
-        opts: defaults,umask=027,uid=1002,gid=1002
+        opts: defaults,umask={{ host_folder.value.umask | default('027') }},uid=1002,gid=1002
         state: mounted
