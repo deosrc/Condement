@@ -1,3 +1,0 @@
-- hosts: all
-  tasks:
-    # Add install tasks here...
