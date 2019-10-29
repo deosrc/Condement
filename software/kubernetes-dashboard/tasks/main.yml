@@ -16,6 +16,15 @@
     - name: Deploy yaml file
       shell: kubectl apply -f /home/vagrant/custom-ingress.yml
 
+- name: Disable kubernetes dashboard login
+  block:
+    - name: Copy ingress deployment yml
+      copy:
+        dest: /home/vagrant/disable-login.yml
+        src: disable-login.yml
+    - name: Deploy yaml file
+      shell: kubectl apply -f /home/vagrant/disable-login.yml
+
 - name: Create desktop shortcut
   become: yes
   become_user: root
