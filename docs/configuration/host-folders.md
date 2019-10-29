@@ -28,8 +28,15 @@ directory, use a subfolder of `/home/dev/`.
 
 ### `umask` (Optional)
 
-The umask to apply to the folder mount. This is an optional property which will default to `'027'` if not specified.
-Only octal notation is supported.
+The umask to apply to the folder mount. Only octal notation has been tested.
+
+This is an optional property which will default to `'027'` if not specified. This grants the following permissions:
+
+|       | Read | Write | Execute |
+| ----- | ---- | ----- | ------- |
+| User  | ✔️   | ✔️    | ✔️      |
+| Group | ✔️   | ❌     | ✔️      |
+| Other | ❌    | ❌     | ❌       |
 
 ## Persistent Storage
 
@@ -44,27 +51,25 @@ for the `persistent_storage` host folder.
 ## Ownership and Permissions
 
 Due to the limitations of VirtualBox Shared Folders, the owner and permissions of files within a host folder cannot be
-modified. This is because these settings cannot map to filesystems such as NTFS.
+modified. This is because these settings cannot map to filesystems such as NTFS. Instead, permissions must be set at the
+host folder level. This can be done via the [umask](#umask) property.
 
-As a result and in order to provide
-best compatibility, all host folders are mounted with the `dev` user and group as the owner and use `0755` permissions.
-This results in the following:
-
-|       | Read     | Write    | Execute  |
-| ----- | -------- | -------- | -------- |
-| User  | &#10004; | &#10004; | &#10004; |
-| Group | &#10004; | &#10006; | &#10004; |
-| Other | &#10004; | &#10006; | &#10004; |
+All host folders are owned by the `dev` user and group.
 
 ## Example
 
 ```yaml
 host_folders:
   repos:
-    source: "~\\Repos"
+    source: "~/Repos"
     target: "/home/dev/Repos"
 
+  ssh:
+    source: "~/.ssh"
+    target: "/home/dev/.ssh"
+    umask: "077"
+
   persistent_storage:
-    source: "~\\CondementPersistent\\<hostname>"
+    source: "~/CondementPersistent/<hostname>"
     target: "/mnt/persistent_storage"
 ```
