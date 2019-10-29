@@ -5,11 +5,11 @@
     - name: Download k3s install script
       get_url:
         dest: /home/vagrant/k3s-install.sh
-        url: https://raw.githubusercontent.com/rancher/k3s/master/install.sh
+        url: https://get.k3s.io/
         mode: +x
 
     - name: Execute install script
-      shell: /home/vagrant/k3s-install.sh
+      shell: /home/vagrant/k3s-install.sh --write-kubeconfig-mode 644
 
     - name: Enable and start k3s service
       service:

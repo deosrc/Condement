@@ -1,0 +1,16 @@
+# Configure ingress for external access
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: k8s.localtest.me
+  namespace: kubernetes-dashboard
+  labels:
+    k8s-app: kubernetes-dashboard
+spec:
+  rules:
+  - host: k8s.localtest.me
+    http:
+      paths:
+      - backend:
+          serviceName: kubernetes-dashboard
+          servicePort: 80
