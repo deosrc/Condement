@@ -2,7 +2,7 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: kubernetes-dashboard-ingress
+  name: k8s.localtest.me
   namespace: kubernetes-dashboard
   labels:
     k8s-app: kubernetes-dashboard
