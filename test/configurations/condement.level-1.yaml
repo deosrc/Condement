@@ -8,6 +8,7 @@ resource:
   video_memory_mb: 128
   video_3d_acceleration: true
   monitor_count: 2
+  rdp_port: 5000
 os:
   hostname: "condement-testing-level-1"
   keyboard_layout: "en_gb"
