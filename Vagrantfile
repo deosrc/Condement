@@ -48,6 +48,7 @@ Vagrant.configure(2) do |config|
             else
                 v.customize ['modifyvm', :id, '--vrde', 'on']
                 v.customize ['modifyvm', :id, '--vrdeport', condement_config['resource']['rdp_port']]
+                v.customize ['modifyvm', :id, '--vrdeauthtype', 'external']
             end
 
             # Configure each host_folder as a permanent share
