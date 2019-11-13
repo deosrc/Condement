@@ -73,6 +73,9 @@ Vagrant.configure(2) do |config|
                     end
 
                     v.customize ['sharedfolder', 'add', :id, '--name', folder_name, '--hostpath', absolute_path]
+                    if (folder['enable_symlinks'] || false) then
+                        v.customize ['setextradata', :id, 'VBoxInternal2/SharedFoldersEnableSymlinksCreate/' + folder_name, '1']
+                    end
                 end
             end
         end

@@ -38,6 +38,13 @@ This is an optional property which will default to `'027'` if not specified. Thi
 | Group | ✔️   | ❌     | ✔️      |
 | Other | ❌    | ❌     | ❌       |
 
+### `enable_symlinks` (Optional)
+
+Enables the creation and following of symlinks within the host folder.
+
+This is disabled by default as it can grant the VM access to parts of the host filesystem outside of the host folders,
+however, it is sometime required by development tools (e.g. `npm` does not work correctly without symlinks).
+
 ## Persistent Storage
 
 The `persistent_storage` host folder is a special entry. Installed software will map their configuration files to
@@ -63,6 +70,7 @@ host_folders:
   repos:
     source: "~/Repos"
     target: "/home/dev/Repos"
+    enable_symlinks: true
 
   ssh:
     source: "~/.ssh"

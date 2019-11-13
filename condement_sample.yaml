@@ -73,6 +73,8 @@ host_folders:
     source: "~\\Repos"
     # The target folder inside the Virtual Machine to mount the folder to.
     target: "/home/dev/Repos"
+    # Allow creation and following of symlinks in the folder
+    enable_symlinks: true
 
   # The host_folder below is a special entry. Installed software will map their configuration files to /mnt/persistent_storage.
   # This allows settings such as editor preferences to remain between Virtual Machine rebuilds. The `<hostname>` tag will be replaced
