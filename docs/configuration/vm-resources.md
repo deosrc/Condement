@@ -32,6 +32,16 @@ Determines if 3D video acceleration should be enabled.
 
 The number of monitors to set for the VM. Secondary monitor may need enabling in the view menu before being used.
 
+### `rdp_port`
+
+The port number to use for the Remote Desktop Connection.
+
+To disable Remote Desktop support, this property should be removed. To use the default connection port (so that the port
+does not need to be specified when connecting) set this to `3389`. If this port is already in use, the setup **will not
+fail**. You should set this to an unused port number.
+
+For more information, see [Connecting via Remote Desktop](../remote-desktop.md).
+
 ## Example
 
 ```yml

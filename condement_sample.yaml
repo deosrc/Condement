@@ -26,6 +26,9 @@ resource:
   # The number of monitors to set for the VM. Secondary monitor may need enabling in the view menu before being used.
   monitor_count: 1
 
+  # The port to use for remote desktop support. Remove to disable.
+  rdp_port: 3389
+
 os:
   # The hostname of the Virtual Machine.
   # This is also used for the Virtual Machine name in VirtualBox.

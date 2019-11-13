@@ -42,6 +42,15 @@ Vagrant.configure(2) do |config|
             v.customize ['modifyvm', :id, '--vram', condement_config['resource']['video_memory_mb']]
             v.customize ['modifyvm', :id, '--monitorcount', condement_config['resource']['monitor_count']]
 
+            # Configure remote desktop
+            if (condement_config['resource']['rdp_port'] == nil) then
+                v.customize ['modifyvm', :id, '--vrde', 'off']
+            else
+                v.customize ['modifyvm', :id, '--vrde', 'on']
+                v.customize ['modifyvm', :id, '--vrdeport', condement_config['resource']['rdp_port']]
+                v.customize ['modifyvm', :id, '--vrdeauthtype', 'external']
+            end
+
             # Configure each host_folder as a permanent share
             if (condement_config['host_folders'] != nil) then
                 condement_config['host_folders'].each do |folder_name, folder|
