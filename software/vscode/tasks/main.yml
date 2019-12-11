@@ -28,3 +28,9 @@
     loop_var: persistent_storage
   include_role:
     name: persistent-storage
+
+- name: Install required extensions
+  with_items: "{{ software_item.value.extensions }}"
+  loop_control:
+    loop_var: ext
+  shell: "code --install-extension {{ ext }} --force"
