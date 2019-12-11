@@ -61,3 +61,13 @@
     loop_var: host_folder
   include_role:
     name: host-folder
+
+- name: Copy config file to desktop
+  become: yes
+  become_user: root
+  copy:
+    src: /vagrant/condement.yaml
+    dest: /home/dev/Desktop/condement.yaml
+    owner: dev
+    group: dev
+    mode: u=rw,g=r,o=
