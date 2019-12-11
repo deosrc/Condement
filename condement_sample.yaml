@@ -2,7 +2,7 @@
 # Condement Sample Config File #
 ################################
 
-condement_version: 0.4
+condement_version: 0.5
 
 # Determines if VirtualBox should show the Virtual Machine display once it is created.
 show_gui: true
