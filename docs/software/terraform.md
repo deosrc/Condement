@@ -33,9 +33,10 @@ terraform:
 
 #### `version`
 
-|      |          |
-| ---- | -------- |
-| Type | `string` |
+|         |            |
+| ------- | ---------- |
+| Type    | `string`   |
+| Default | `'0.12.6'` |
 
 The terraform version to be installed.
 

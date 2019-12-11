@@ -32,9 +32,10 @@ terraform:
 
 #### `version`
 
-|      |          |
-| ---- | -------- |
-| Type | `string` |
+|         |           |
+| ------- | --------- |
+| Type    | `string`  |
+| Default | `'1.6.0'` |
 
 The Azure Data Studio version to be installed.
 
