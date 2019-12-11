@@ -2,23 +2,33 @@
 
 ## Description
 
-Unlike other sections, the software section is a simple list of software to install. Each entry in the list must be a
-string matching a file within the [software](../../software) directory of the repository (without the file extension).
-
-If you wish to quickly disable a piece of software, you can do so by adding a `#` to the beginning of the line.
-
-## Example
+Unlike other sections, the software section can change drastically for each configuration. In it's most basic form, the
+software section is a yaml map of empty objects. Each item in the map is the Software ID of the software package to be
+installed. For information about available software pacakges, see the [software documentation](../software/).
 
 ```yml
-software: [
-  'vscode',
-  #'azure-data-studio',
-  'docker',
-  'k3s',
-  'kubernetes-dashboard',
-  'firefox',
-  #'chromium',
-  'golang',
-  'gitkraken',
-  ]
+software:
+  docker:
+  k3s:
+  kubernetes-dashboard:
+```
+
+In more complicated configurations, each item in the software map can include configuration for more specific
+installation instructions, this may be selecting a version number, installing addition components or other actions. For
+details of the available configuration properties, see the documentation page for the software being installed.
+
+```yml
+software:
+  docker:
+  k3s:
+  terraform:
+    version: '0.12.18'
+  kubernetes-dashboard:
+  azure-data-studio:
+    version: '1.6.0'
+  vscode:
+    extensions:
+    - editorconfig.editorconfig
+    - davidanson.vscode-markdownlint
+
 ```

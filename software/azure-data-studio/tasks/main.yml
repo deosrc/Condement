@@ -2,7 +2,7 @@
   become: yes
   become_user: root
   vars:
-    azuredatastudio_version: '1.6.0'
+    azuredatastudio_version: "{{ software_item.value.version | default('1.6.0') }}"
   block:
     - name: Check if package is already installed
       shell: dpkg --list | grep -E "^ii +azuredatastudio"

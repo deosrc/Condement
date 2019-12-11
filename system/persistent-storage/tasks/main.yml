@@ -1,17 +1,17 @@
-- name: "Create root persistent storage directory for {{ software_item }}"
+- name: "Create root persistent storage directory for {{ software_item.key }}"
   become: yes
   become_user: root
   file:
-    path: "/mnt/persistent_storage/{{ software_item }}"
+    path: "/mnt/persistent_storage/{{ software_item.key }}"
     state: directory
     owner: dev
     group: dev
 
-- name: "Create persistent storage directory '{{ persistent_storage.folder_id }}' for {{ software_item }}"
+- name: "Create persistent storage directory '{{ persistent_storage.folder_id }}' for {{ software_item.key }}"
   become: yes
   become_user: root
   file:
-    path: "/mnt/persistent_storage/{{ software_item }}/{{ persistent_storage.folder_id }}"
+    path: "/mnt/persistent_storage/{{ software_item.key }}/{{ persistent_storage.folder_id }}"
     state: directory
     owner: dev
     group: dev
@@ -21,7 +21,7 @@
   become_user: root
   file:
     dest: "{{ persistent_storage.location }}"
-    src: "/mnt/persistent_storage/{{ software_item }}/{{ persistent_storage.folder_id }}"
+    src: "/mnt/persistent_storage/{{ software_item.key }}/{{ persistent_storage.folder_id }}"
     state: link
     owner: dev
     group: dev

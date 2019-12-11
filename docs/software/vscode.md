@@ -28,6 +28,32 @@ Installs deb package from Microsoft official site.
 
 Persistent storage holds user settings in addition to installed extensions.
 
+### Configuration Settings
+
+**Example:**
+
+```yaml
+vscode:
+  extensions:
+  - ms-azuretools.vscode-docker
+  - editorconfig.editorconfig
+  - ms-vscode.go
+  - ms-kubernetes-tools.vscode-kubernetes-tools
+  - yzhang.markdown-all-in-one
+  - davidanson.vscode-markdownlint
+  - bierner.markdown-mermaid
+  - streetsidesoftware.code-spell-checker
+```
+
+#### `extensions`
+
+|      |        |
+| ---- | ------ |
+| Type | `List` |
+
+A list of extensions to be installed.
+
 ## Limitations
 
-`Ctrl` multi-cursor doesn't work in VirtualBox window.
+- `Ctrl` multi-cursor doesn't work in VirtualBox window.
+- Remote Desktop Shared Clipboard causes crash (#19).

@@ -2,7 +2,7 @@
 
 |                             |                                                                                         |
 | --------------------------- | --------------------------------------------------------------------------------------- |
-| Version                     | 0.12.6                                                                                  |
+| Version                     | [Configurable](#version) (default 0.12.6)                                               |
 | Condement Software ID       | terraform                                                                               |
 | Website                     | [terraform.io](https://www.terraform.io/)                                               |
 | License                     | [Mozilla Public License V2](https://github.com/hashicorp/terraform/blob/master/LICENSE) |
@@ -21,6 +21,24 @@ Source: [terraform.io](https://www.terraform.io/)
 ## Install Notes
 
 Installed from official Hashicorp releases.
+
+### Configuration Settings
+
+**Example:**
+
+```yaml
+terraform:
+  version: '0.12.18'
+```
+
+#### `version`
+
+|         |            |
+| ------- | ---------- |
+| Type    | `string`   |
+| Default | `'0.12.6'` |
+
+The terraform version to be installed.
 
 ## Limitations
 

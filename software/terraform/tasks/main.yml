@@ -2,7 +2,7 @@
   become: yes
   become_user: root
   vars:
-    terraform_version: '0.12.6'
+    terraform_version: "{{ software_item.value.version | default('0.12.6') }}"
   block:
     - name: Install Terraform
       unarchive:

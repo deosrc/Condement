@@ -7,7 +7,9 @@ The {software-version} should be the version identifier of the software package
 which is installed. Where possible, the latest stable version number should be
 hard coded to ensure consistency across environments. If this is not possible,
 you can use the latest available stable version. If this is the case, use "latest"
-instead of the version number in the documentation table.
+instead of the version number in the documentation table. If this is configurable,
+include a link to the configuration property and any default
+(e.g. `[Configurable](#version) (default 0.12.6)`).
 
 The {software-id} should be a unique string to identify the software package
 within Condement. This is used in a number of places such as the Ansible folder
@@ -58,6 +60,31 @@ Include any special notes about the install. For example, the golang software
 package also installs a number of go packages which are used by the VSCode
 golang extension order to reduce the time to configure the machine.
 -->
+
+### Configuration Settings
+
+<!--
+Explain any configuration options which can be used here. Start with an example of the full configuration, then explain
+each item in detail.
+
+If there are no configuration options. This section can be removed.
+-->
+
+**Example:**
+
+```yaml
+vscode:
+  version: '1.0'
+```
+
+#### `version`
+
+|         |          |
+| ------- | -------- |
+| Type    | `string` |
+| Default | `'1.0'`  |
+
+The version to be installed.
 
 ### Service Ports
 

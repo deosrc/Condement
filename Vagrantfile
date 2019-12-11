@@ -6,7 +6,7 @@ if (!File.file?('./condement.yaml')) then
 end
 condement_config = YAML.load_file('./condement.yaml')
 
-this_condement_version = 0.4
+this_condement_version = 0.5
 
 if (condement_config['condement_version'] == nil) then
     raise 'condement_version must be specified'
