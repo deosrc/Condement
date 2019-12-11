@@ -7,9 +7,9 @@
       import_role:
         name: "desktop-{{ os.desktop }}"
     - name: Install software
-      with_items:
-        - "{{ software }}"
+      loop: "{{ software | dict2items }}"
       loop_control:
         loop_var: software_item
+        label: "{{ software_item.key }}"
       include_role:
-        name: "software-{{ software_item }}"
+        name: "software-{{ software_item.key }}"
