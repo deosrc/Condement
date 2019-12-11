@@ -2,7 +2,7 @@
 
 |                             |                                                                                              |
 | --------------------------- | -------------------------------------------------------------------------------------------- |
-| Version                     | Configurable (default 1.6.0)                                                                 |
+| Version                     | [Configurable](#version) (default 1.6.0)                                                     |
 | Condement Software ID       | azure-data-studio                                                                            |
 | Website                     | [docs.microsoft.com/sql/azure-data-studio](https://docs.microsoft.com/sql/azure-data-studio) |
 | License                     | [MIT License](https://github.com/microsoft/sqltoolsservice/blob/master/license.txt)          |
@@ -32,8 +32,8 @@ terraform:
 
 #### `version`
 
-|      |        |
-| ---- | ------ |
+|      |          |
+| ---- | -------- |
 | Type | `string` |
 
 The Azure Data Studio version to be installed.
