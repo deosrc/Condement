@@ -2,7 +2,7 @@
 
 |                             |                                                                                              |
 | --------------------------- | -------------------------------------------------------------------------------------------- |
-| Version                     | 1.6.0                                                                                        |
+| Version                     | Configurable (default 1.6.0)                                                                 |
 | Condement Software ID       | azure-data-studio                                                                            |
 | Website                     | [docs.microsoft.com/sql/azure-data-studio](https://docs.microsoft.com/sql/azure-data-studio) |
 | License                     | [MIT License](https://github.com/microsoft/sqltoolsservice/blob/master/license.txt)          |
@@ -20,6 +20,23 @@ Source: [docs.microsoft.com/sql/azure-data-studio](https://docs.microsoft.com/sq
 ## Install Notes
 
 Installed from official Microsoft source.
+
+### Configuration Settings
+
+**Example:**
+
+```yaml
+terraform:
+  version: '1.6.0'
+```
+
+#### `version`
+
+|      |        |
+| ---- | ------ |
+| Type | `string` |
+
+The Azure Data Studio version to be installed.
 
 ## Limitations
 
