@@ -46,6 +46,17 @@ Once you have selected a software ID, move to the next section.
 2. In the `software` folder, copy the `!template` folder. Set the name of the new folder to the software ID you selected.
 3. Open the `playbook.yml` file within the folder and add Ansible tasks to install the required software.
 
+## Configuration Variables
+
+For some software, it may be desirable for the user to install additional components or supply install arguments. A good
+example of this is the [terraform package](../software/terraform.md) which allows a user to specify a specific version
+to install, or the [vscode software package](../software/vscode.md) which allows a user to supply a list of
+extensions to be installed.
+
+Settings for an extension are created as yaml child objects of the software map (see
+[software configuration documentation](../configuration/software.md)). These settings are automatically loaded into the
+`software_item.value` variable and can be used as `"{{ software_item.value.version | default('1.6.0') }}"`.
+
 ## Testing the Install Package
 
 ### Testing Levels
