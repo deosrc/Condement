@@ -30,6 +30,8 @@
     name: persistent-storage
 
 - name: Install required extensions
+  become: yes
+  become_user: dev
   with_items: "{{ software_item.value.extensions }}"
   loop_control:
     loop_var: ext
