@@ -2,7 +2,7 @@
 
 |                             |                                                                                         |
 | --------------------------- | --------------------------------------------------------------------------------------- |
-| Version                     | [Configurable](#version) (default 0.12.6)                                               |
+| Version                     | [Configurable](#version) (default 0.12.18)                                               |
 | Condement Software ID       | terraform                                                                               |
 | Website                     | [terraform.io](https://www.terraform.io/)                                               |
 | License                     | [Mozilla Public License V2](https://github.com/hashicorp/terraform/blob/master/LICENSE) |
@@ -36,7 +36,7 @@ terraform:
 |         |            |
 | ------- | ---------- |
 | Type    | `string`   |
-| Default | `'0.12.6'` |
+| Default | `'0.12.18'` |
 
 The terraform version to be installed.
 
