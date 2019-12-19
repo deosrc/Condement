@@ -1,4 +1,4 @@
-condement_version: 0.4
+condement_version: 0.5
 
 show_gui: true
 
@@ -15,23 +15,23 @@ os:
   desktop: "xubuntu"
   update_packages: false
 
-software: [
-  'azure-cli',
-  'azure-data-studio',
-  'chromium',
-  'docker',
-  'firefox',
-  'gitkraken',
-  'golang',
-  'k3s',
-  'kubernetes-dashboard',
-  'powershell',
-  'slack',
-  'terraform',
-  'thunderbird',
-  'vscode',
-  #'...',
-  ]
+software:
+  azure-cli:
+  azure-data-studio:
+  chromium:
+  docker:
+  dotnetcore3-sdk:
+  firefox:
+  gitkraken:
+  golang:
+  k3s:
+  kubernetes-dashboard:
+  powershell:
+  slack:
+  terraform:
+  thunderbird:
+  vscode:
+  #...:
 
 host_folders:
   persistent_storage:

@@ -1,4 +1,4 @@
-condement_version: 0.4
+condement_version: 0.5
 
 show_gui: true
 
@@ -12,12 +12,11 @@ resource:
 os:
   hostname: "condement-testing-level-1"
   keyboard_layout: "en_gb"
-  desktop: "<desktop>"
+  desktop: "xubuntu"
   update_packages: false
 
-software: [
-  #'...'
-  ]
+software:
+  #...:
 
 host_folders:
 forwarded_ports:

@@ -1,4 +1,4 @@
-condement_version: 0.4
+condement_version: 0.5
 
 show_gui: true
 
@@ -15,13 +15,12 @@ os:
   desktop: "xubuntu"
   update_packages: false
 
-software: [
-  'docker',
-  'k3s',
-  'kubernetes-dashboard',
-  'vscode',
-  #'...',
-  ]
+software:
+  docker:
+  k3s:
+  kubernetes-dashboard:
+  vscode:
+  #...:
 
 host_folders:
   persistent_storage:
