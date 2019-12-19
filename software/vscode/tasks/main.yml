@@ -32,7 +32,14 @@
 - name: Install required extensions
   become: yes
   become_user: dev
-  with_items: "{{ software_item.value.extensions }}"
-  loop_control:
-    loop_var: ext
-  shell: "code --install-extension {{ ext }} --force"
+  block:
+    - name: Gather list of currently installed extensions
+      shell: code --list-extensions
+      register: installed_extensions
+
+    - name: Install extensions
+      with_items: "{{ software_item.value.extensions }}"
+      loop_control:
+        loop_var: ext
+      when: (ext|lower) not in (installed_extensions.stdout_lines|lower)
+      shell: "code --install-extension {{ ext }} --force"
