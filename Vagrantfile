@@ -29,7 +29,7 @@ Vagrant.configure(2) do |config|
             v.memory = condement_config['resource']['memory_mb']
 
             # Configure clipboard and drag and drop for ease of use
-            v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+            v.customize ["modifyvm", :id, "--clipboard-mode", "bidirectional"]
             v.customize ["modifyvm", :id, "--draganddrop", "bidirectional"]
 
             # Configure the display
