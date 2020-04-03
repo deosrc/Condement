@@ -13,7 +13,9 @@
       block:
         - name: Check if package is already installed
           shell: dpkg --list | grep -E "^ii +code"
-          ignore_errors: yes
+          check_mode: no
+          failed_when: false
+          changed_when: false
           register: is_code_installed
         - name: Download and install Visual Studio Code if not present
           when: "is_code_installed.rc == 1"
@@ -35,6 +37,9 @@
   block:
     - name: Gather list of currently installed extensions
       shell: code --list-extensions
+      check_mode: no
+      failed_when: false
+      changed_when: false
       register: installed_extensions
 
     - name: Install extensions

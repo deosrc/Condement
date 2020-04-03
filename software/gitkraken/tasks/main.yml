@@ -16,7 +16,9 @@
       block:
         - name: Check if package is already installed
           shell: dpkg --list | grep -E "^ii +gitkraken"
-          ignore_errors: yes
+          check_mode: no
+          failed_when: false
+          changed_when: false
           register: is_gitkraken_installed
         - name: Download and install GitKraken if not present
           when: "is_gitkraken_installed.rc == 1"

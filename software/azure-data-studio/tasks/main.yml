@@ -6,7 +6,9 @@
   block:
     - name: Check if package is already installed
       shell: dpkg --list | grep -E "^ii +azuredatastudio"
-      ignore_errors: yes
+      check_mode: no
+      failed_when: false
+      changed_when: false
       register: is_azure_data_studio_installed
 
     - name: Install package
