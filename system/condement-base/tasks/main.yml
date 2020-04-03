@@ -55,6 +55,14 @@
         group: root
         mode: u=rwx,g=rx,o=rx
 
+    - name: Replace DNS resolv.conf
+      file:
+        state: link
+        src: /run/systemd/resolve/resolv.conf
+        dest: /etc/resolv.conf
+        owner: root
+        group: root
+
 - name: Create host folder mounts
   loop: "{{ [] if host_folders is none else (host_folders | dict2items) }}"
   loop_control:
