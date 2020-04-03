@@ -27,6 +27,7 @@
     - name: Install go packages used by VSCode
       become: yes
       become_user: dev
+      ignore_errors: yes
       with_items:
         - github.com/ramya-rao-a/go-outline
         - github.com/acroca/go-symbols
