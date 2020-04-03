@@ -2,15 +2,21 @@
   become: yes
   become_user: root
   block:
+    - name: Check if golang has already been downloaded
+      stat:
+        path: /home/vagrant/go1.12.2.linux-amd64.tar.gz
+      register: golang_downloaded
+
     - name: Download golang
+      when: golang_downloaded.stat.exists == false
       get_url:
-        dest: /home/vagrant/golang.tar.gz
+        dest: /home/vagrant/go1.12.2.linux-amd64.tar.gz
         url: https://dl.google.com/go/go1.12.2.linux-amd64.tar.gz
 
     - name: Install golang
       unarchive:
         dest: /usr/local
-        src: /home/vagrant/golang.tar.gz
+        src: /home/vagrant/go1.12.2.linux-amd64.tar.gz
 
     - name: Add go to path
       lineinfile:
