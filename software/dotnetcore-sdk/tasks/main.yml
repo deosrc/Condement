@@ -1,4 +1,4 @@
-- name: Install .NET Core 3 SDK
+- name: Install .NET Core SDK
   become: yes
   become_user: root
   block:
@@ -7,4 +7,4 @@
         name: software-microsoft-package-repository
     - name: Install package
       apt:
-        name: dotnet-sdk-3.0
+        name: "{{ software_item.value.versions | map('regex_replace', '^(.*)$', 'dotnet-sdk-\\1') | list }}"

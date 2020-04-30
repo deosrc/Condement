@@ -1,9 +1,9 @@
-# Software - .NET Core 3 SDK
+# Software - .NET Core SDK
 
 |                             |                                                                |
 | --------------------------- | -------------------------------------------------------------- |
-| Version                     | `latest`                                                       |
-| Condement Software ID       | `dotnetcore3-sdk`                                              |
+| Version                     | `various`                                                      |
+| Condement Software ID       | `dotnetcore-sdk`                                               |
 | Website                     | [dotnet.microsoft.com](https://dotnet.microsoft.com/)          |
 | License                     | [MIT](https://github.com/dotnet/core/blob/master/LICENSE.TXT)  |
 | Maintainer                  | [Deosrc](https://github.com/deosrc)                            |
@@ -25,6 +25,25 @@ Source: [Wikipedia](https://en.wikipedia.org/wiki/.NET_Core)
 
 The Condement software package for the Microsoft Package Repository is included automatically. There is no need to
 specify it in the configuration file.
+
+### Configuration Settings
+
+**Example:**
+
+```yaml
+dotnetcore-sdk:
+  versions:
+    - "2.1"
+    - "3.1"
+```
+
+#### `versions`
+
+|      |        |
+| ---- | ------ |
+| Type | `List` |
+
+A list of SDK versions to be installed.
 
 ## Limitations
 
