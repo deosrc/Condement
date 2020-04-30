@@ -46,7 +46,7 @@ os:
   update_packages: true
 
 # The software to install to the Virtual Machine.
-# Each entry must match with a puppet file in the "software" folder.
+# Each entry must match with an ansible file in the "software" folder.
 software:
   # azure-cli:
   # azure-data-studio:
